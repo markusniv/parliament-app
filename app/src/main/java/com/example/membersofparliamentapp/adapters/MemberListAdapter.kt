@@ -4,9 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.recyclerview.widget.RecyclerView
+import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentMemberListBinding
 import com.example.membersofparliamentapp.databinding.MemberViewBinding
+import com.example.membersofparliamentapp.functions.getPartyColor
 import com.example.membersofparliamentapp.model.Member
 
 class MemberListAdapter : RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
@@ -28,6 +32,8 @@ class MemberListAdapter : RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
         with(holder) {
             with(memberList[position]) {
                 binding.singleListMemberParty.text = this.party
+                binding.singleListMemberParty.setTextColor(holder.itemView.resources.getColor(
+                    getPartyColor(this)))
                 binding.singleListMemberName.text = "${this.first} ${this.last}"
             }
         }

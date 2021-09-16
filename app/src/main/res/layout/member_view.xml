@@ -11,21 +11,27 @@
             android:layout_height="match_parent"
             android:padding="8dp">
 
-            <TextView
-                android:id="@+id/singleListMemberParty"
+            <RelativeLayout
+                android:id="@+id/singleListMemberPartyBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp"
-                android:text="@string/list_member_party"
-                android:textColor="@color/black"/>
+                android:layout_marginEnd="10dp">
+
+                <TextView
+                    android:id="@+id/singleListMemberParty"
+                    android:layout_width="60dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:text="@string/list_member_party"
+                    android:textColor="@color/black"/>
+            </RelativeLayout>
 
             <TextView
                 android:id="@+id/singleListMemberName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@+id/singleListMemberParty"
+                android:layout_toEndOf="@+id/singleListMemberPartyBox"
                 android:text="@string/list_member_name"
                 android:layout_centerInParent="true"
                 android:textSize="16sp"/>

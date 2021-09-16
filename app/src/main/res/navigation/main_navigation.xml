@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/memberListFragment">
+
+    <fragment
+        android:id="@+id/memberListFragment"
+        android:name="com.example.membersofparliamentapp.screens.member_list.MemberListFragment"
+        android:label="fragment_member_list"
+        tools:layout="@layout/fragment_member_list" >
+        <action
+            android:id="@+id/action_memberListFragment_to_memberInformationFragment"
+            app:destination="@id/memberInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/memberInformationFragment"
+        android:name="com.example.membersofparliamentapp.screens.member_information.MemberInformationFragment"
+        android:label="fragment_member_information"
+        tools:layout="@layout/fragment_member_information" >
+        <action
+            android:id="@+id/action_memberInformationFragment_to_memberListFragment"
+            app:destination="@id/memberListFragment" />
+    </fragment>
+</navigation>

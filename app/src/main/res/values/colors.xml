@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="keskusta">#01954B</color>
+    <color name="kokoomus">#006288</color>
+    <color name="kristilliset">#1574c4</color>
+    <color name="liike_nyt">#ae2375</color>
+    <color name="persu">#FFD500</color>
+    <color name="ruotsalaiset">#FFDD93</color>
+    <color name="demarit">#E11931</color>
+    <color name="vasemmisto">#F00A64</color>
+    <color name="vihreat">#61BF1A</color>
 </resources>

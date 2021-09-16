@@ -1,12 +1,6 @@
 package com.example.membersofparliamentapp.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import kotlinx.android.parcel.Parcelize
-
-@Entity(tableName = "member_table")
-data class Member (
-    @PrimaryKey
+data class MemberJson (
     val personNumber: Int,
     val seatNumber: Int = 0,
     val last: String,

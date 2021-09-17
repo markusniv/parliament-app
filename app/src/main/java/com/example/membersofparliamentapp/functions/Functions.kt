@@ -13,6 +13,7 @@ fun getPartyColor(memb : Member) : Int {
         "ps" -> R.color.persu
         "r" -> R.color.ruotsalaiset
         "sd" -> R.color.demarit
+        "vihr" -> R.color.vihreat
         else -> R.color.vasemmisto
     }
 }

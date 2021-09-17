@@ -26,17 +26,7 @@ class MemberViewModel (application: Application): AndroidViewModel(application) 
 
     fun addMembers() {
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val memberListResult = MemberApi.retrofitService.getMembers()
-                println(memberListResult)
-
-                for (member in memberListResult) {
-                    repository.addMember(member)
-                }
-            } catch (e: Exception) {
-                Log.i("Json call", "Failed misarably.")
-            }
-
+            repository.addMember()
         }
     }
 

@@ -24,7 +24,7 @@ class MemberListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_list, container, false)
 
         val adapter = MemberListAdapter()

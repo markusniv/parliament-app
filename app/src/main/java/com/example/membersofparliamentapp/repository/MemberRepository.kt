@@ -8,11 +8,12 @@ import com.example.membersofparliamentapp.network.MemberApi
 
 class MemberRepository(private val memberDao: MemberDao) {
     val readAllData: LiveData<List<Member>> = memberDao.readAllData()
-    val readMemberAmount: LiveData<Int> = memberDao.getMemberAmount()
+    var memberCount: Int = 0
 
-    suspend fun addMember() {
-        Log.i("readMemberAmount value", readMemberAmount.value.toString() + " isn't null, I think?")
-        if (readMemberAmount.value == 0) {
+    suspend fun addMembers() {
+        memberCount = memberDao.getMemberCount()
+        Log.i("Member count", "Member count is: $memberCount")
+        if (memberCount == 0) {
             Log.i("Database pull check", "There wasn't any members available!")
             try {
                 val memberListResult = MemberApi.retrofitService.getMembers()

@@ -16,7 +16,7 @@ interface MemberDao {
     @Query("SELECT * FROM member_table ORDER BY personNumber")
     fun readAllData(): LiveData<List<Member>>
 
-    @Query("Select COUNT(*) from member_table")
-    fun getMemberAmount(): LiveData<Int>
+    @Query("SELECT COUNT(*) from member_table")
+    suspend fun getMemberCount() : Int
 
 }

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/memberListFragment"
         android:name="com.example.membersofparliamentapp.screens.member_list.MemberListFragment"
-        android:label="fragment_member_list"
+        android:label="Finnish Members of Parliament"
         tools:layout="@layout/fragment_member_list" >
         <action
             android:id="@+id/action_memberListFragment_to_memberInformationFragment"
@@ -17,10 +17,13 @@
     <fragment
         android:id="@+id/memberInformationFragment"
         android:name="com.example.membersofparliamentapp.screens.member_information.MemberInformationFragment"
-        android:label="fragment_member_information"
+        android:label="Member information"
         tools:layout="@layout/fragment_member_information" >
         <action
             android:id="@+id/action_memberInformationFragment_to_memberListFragment"
             app:destination="@id/memberListFragment" />
+        <argument
+            android:name="member"
+            app:argType="com.example.membersofparliamentapp.model.Member" />
     </fragment>
 </navigation>

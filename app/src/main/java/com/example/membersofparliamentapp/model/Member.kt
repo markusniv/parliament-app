@@ -1,9 +1,11 @@
 package com.example.membersofparliamentapp.model
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "member_table")
 data class Member (
     @PrimaryKey
@@ -17,4 +19,4 @@ data class Member (
     val twitter: String = "",
     val bornYear: Int = 0,
     val constituency: String = ""
-)
+) : Parcelable

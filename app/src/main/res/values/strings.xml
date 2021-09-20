@@ -2,4 +2,11 @@
     <string name="app_name">MembersOfParliamentApp</string>
     <string name="list_member_party">PRT</string>
     <string name="list_member_name">Edustaja Edustajainen</string>
+    <string name="member_name">Member Name</string>
+    <string name="member_constituency">Constituency</string>
+    <string name="member_age">Age</string>
+    <string name="member_party">Party</string>
+    <string name="member_title">Title</string>
+    <string name="new_member_button">New member</string>
+    <string name="years_old"> years old</string>
 </resources>

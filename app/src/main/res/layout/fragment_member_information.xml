@@ -1,12 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".screens.member_information.MemberInformationFragment"
-    tools:viewBindingIgnore="true">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".screens.member_information.MemberInformationFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_party"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            app:layout_constraintBottom_toTopOf="@+id/member_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <RelativeLayout
+            android:id="@+id/member_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="200dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                android:hint="@string/member_title"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_title"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="20dp"
+                android:hint="@string/member_name"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="28sp" />
+
+            <TextView
+                android:id="@+id/txt_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_name"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="30dp"
+                android:hint="@string/member_age"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/txt_constituency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_age"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="40dp"
+                android:hint="@string/member_constituency"
+                android:text=""
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

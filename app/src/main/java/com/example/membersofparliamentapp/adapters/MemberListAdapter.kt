@@ -6,12 +6,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.content.res.ResourcesCompat.getColor
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentMemberListBinding
 import com.example.membersofparliamentapp.databinding.MemberViewBinding
 import com.example.membersofparliamentapp.functions.getPartyColor
 import com.example.membersofparliamentapp.model.Member
+import com.example.membersofparliamentapp.screens.member_list.MemberListFragment
+import com.example.membersofparliamentapp.screens.member_list.MemberListFragmentDirections
 
 class MemberListAdapter : RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
 
@@ -35,6 +38,10 @@ class MemberListAdapter : RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
                 binding.singleListMemberParty.setTextColor(holder.itemView.resources.getColor(
                     getPartyColor(this)))
                 binding.singleListMemberName.text = "${this.first} ${this.last}"
+                binding.singleListMember.setOnClickListener {
+                    val action = MemberListFragmentDirections.actionMemberListFragmentToMemberInformationFragment(this)
+                    holder.itemView.findNavController().navigate(action)
+                }
             }
         }
     }

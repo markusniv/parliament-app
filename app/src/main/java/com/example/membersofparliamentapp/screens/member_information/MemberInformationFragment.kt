@@ -17,8 +17,10 @@ import com.example.membersofparliamentapp.databinding.FragmentMemberInformationB
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.viewmodel.MemberViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
+import kotlinx.android.synthetic.main.fragment_member_information.*
 
 private lateinit var binding: FragmentMemberInformationBinding
+private var currentPoints: Int = 0
 
 class MemberInformationFragment : Fragment() {
 
@@ -40,8 +42,16 @@ class MemberInformationFragment : Fragment() {
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
+        currentPoints = args.member.pointsReceived
 
         getMember()
+
+        binding.deductPoints.setOnClickListener {
+            updatePoints(-1)
+        }
+        binding.addPoints.setOnClickListener {
+            updatePoints(1)
+        }
 
         return binding.root
     }
@@ -54,11 +64,12 @@ class MemberInformationFragment : Fragment() {
         binding.txtName.text = ("${memb.first} ${memb.last}")
         binding.txtAge.text = (2021 - memb.bornYear).toString() + " years old"
         binding.txtConstituency.text = memb.constituency
+        binding.pointView.text = currentPoints.toString()
     }
 
     // Get a drawable id of a member's party's logo
-    private fun getLogo(memb : Member) : Int {
-        return when(memb.party) {
+    private fun getLogo(member : Member) : Int {
+        return when(member.party) {
             "kd" -> R.drawable.ic_kd
             "kesk" -> R.drawable.ic_kesk
             "kok" -> R.drawable.ic_kok
@@ -73,4 +84,30 @@ class MemberInformationFragment : Fragment() {
     // Check if the member is a minister and return a string accordingly
     private fun getMinistry(memb : Member) : String = if (memb.minister) "Minister" else "Member of parliament"
 
+    private fun updatePoints(amount: Int) {
+        currentPoints += amount
+        binding.pointView.text = currentPoints.toString()
+    }
+
+    private fun updateDatabase(member: Member) {
+        mMemberViewModel.updatePoints(member)
+    }
+
+    override fun onDestroy() {
+        val tMember = args.member
+        val mMember = Member(
+            tMember.personNumber,
+            tMember.seatNumber,
+            tMember.last,
+            tMember.first,
+            tMember.party,
+            tMember.minister,
+            tMember.picture,
+            tMember.twitter,
+            tMember.bornYear,
+            tMember.constituency,
+            currentPoints)
+        updateDatabase(mMember)
+        super.onDestroy()
+    }
 }

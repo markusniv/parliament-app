@@ -33,4 +33,10 @@ class MemberViewModel : ViewModel() {
         }
     }
 
+    fun updatePoints(member: Member) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updatePoints(member)
+        }
+    }
+
 }

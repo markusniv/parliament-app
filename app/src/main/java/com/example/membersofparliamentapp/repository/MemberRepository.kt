@@ -27,4 +27,8 @@ class MemberRepository(private val memberDao: MemberDao) {
             }
         }
     }
+
+    suspend fun updatePoints(member: Member) {
+        memberDao.updatePoints(member)
+    }
 }

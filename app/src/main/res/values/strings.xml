@@ -9,4 +9,6 @@
     <string name="member_title">Title</string>
     <string name="new_member_button">New member</string>
     <string name="years_old"> years old</string>
+    <string name="addPoint">+</string>
+    <string name="deductPoint">-</string>
 </resources>

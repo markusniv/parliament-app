@@ -17,3 +17,16 @@ fun getPartyColor(memb : Member) : Int {
         else -> R.color.vasemmisto
     }
 }
+fun getPartyName(memb : Member) : String {
+    return when(memb.party) {
+        "kd" -> "Kristillisdemokraatit"
+        "kesk" -> "Keskusta"
+        "kok" -> "Kokoomus"
+        "liik" -> "Liike Nyt"
+        "ps" -> "Perussuomalaiset"
+        "r" -> "Suomen ruotsalainen kansanpuolue"
+        "sd" -> "Sosiaalidemokraatit"
+        "vihr" -> "Vihreät"
+        else -> "Vasemmistoliitto"
+    }
+}

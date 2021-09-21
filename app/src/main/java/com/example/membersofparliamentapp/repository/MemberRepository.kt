@@ -1,5 +1,6 @@
 package com.example.membersofparliamentapp.repository
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import androidx.lifecycle.LiveData
 import com.example.membersofparliamentapp.data.MemberDao
@@ -31,4 +32,5 @@ class MemberRepository(private val memberDao: MemberDao) {
     suspend fun updatePoints(member: Member) {
         memberDao.updatePoints(member)
     }
+
 }

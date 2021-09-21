@@ -1,6 +1,8 @@
 package com.example.membersofparliamentapp.screens.member_information
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -14,10 +16,15 @@ import androidx.navigation.fragment.navArgs
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentMemberInformationBinding
 import com.example.membersofparliamentapp.databinding.FragmentMemberInformationBindingImpl
+import com.example.membersofparliamentapp.functions.getPartyColor
+import com.example.membersofparliamentapp.functions.getPartyName
 import com.example.membersofparliamentapp.model.Member
+import com.example.membersofparliamentapp.network.loadImageOnline
 import com.example.membersofparliamentapp.viewmodel.MemberViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_member_information.*
+import java.util.concurrent.Executors
 
 private lateinit var binding: FragmentMemberInformationBinding
 private var currentPoints: Int = 0
@@ -60,7 +67,10 @@ class MemberInformationFragment : Fragment() {
     private fun getMember() {
         val memb = args.member
         binding.txtTitle.text = getMinistry(memb)
-        binding.imgParty.setImageResource(getLogo(memb))
+        Picasso.get().load("https://avoindata.eduskunta.fi/${memb.picture}").into(binding.imgMember)
+        //binding.imgParty.setImageResource(getLogo(memb))
+        binding.partyText.text = getPartyName(memb)
+        binding.partyText.setTextColor(resources.getColor(getPartyColor(memb)))
         binding.txtName.text = ("${memb.first} ${memb.last}")
         binding.txtAge.text = (2021 - memb.bornYear).toString() + " years old"
         binding.txtConstituency.text = memb.constituency

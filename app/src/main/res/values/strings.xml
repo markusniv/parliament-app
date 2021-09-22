@@ -11,4 +11,17 @@
     <string name="years_old"> years old</string>
     <string name="addPoint">+</string>
     <string name="deductPoint">-</string>
+    <string name="party">Party</string>
+    <string name="name">Name</string>
+    <string name="filters">Filters</string>
+    <string name="restore">Restore</string>
+    <string name="ps">Perussuomalaiset</string>
+    <string name="kd">Kristillisdemokraatit</string>
+    <string name="kesk">Keskusta</string>
+    <string name="kok">Kokoomus</string>
+    <string name="liik">Liike Nyt</string>
+    <string name="rkp">RKP</string>
+    <string name="sd">Sosiaalidemokraatit</string>
+    <string name="vihr">Vihreät</string>
+    <string name="vas">Vasemmistoliitto</string>
 </resources>

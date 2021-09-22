@@ -2,7 +2,9 @@ package com.example.membersofparliamentapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuInflater
 import android.view.View
+import android.widget.PopupMenu
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragment
@@ -26,4 +28,5 @@ class MainActivity : AppCompatActivity() {
 
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/filterKd"
+        android:title="@string/kd"
+        />
+    <item android:id="@+id/filterKesk"
+        android:title="@string/kesk"
+        />
+    <item android:id="@+id/filterKok"
+        android:title="@string/kok"
+        />
+    <item android:id="@+id/filterLiik"
+        android:title="@string/liik"
+        />
+    <item android:id="@+id/filterPs"
+        android:title="@string/ps"
+        />
+    <item android:id="@+id/filterRkp"
+        android:title="@string/rkp"
+        />
+    <item android:id="@+id/filterSd"
+        android:title="@string/sd"
+        />
+    <item android:id="@+id/filterVihr"
+        android:title="@string/vihr"
+        />
+    <item android:id="@+id/filterVas"
+        android:title="@string/vas"
+        />
+</menu>

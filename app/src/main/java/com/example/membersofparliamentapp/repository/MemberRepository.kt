@@ -2,13 +2,17 @@ package com.example.membersofparliamentapp.repository
 
 import android.graphics.drawable.Drawable
 import android.util.Log
+import androidx.constraintlayout.helper.widget.Flow
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.membersofparliamentapp.data.MemberDao
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.network.MemberApi
 
 class MemberRepository(private val memberDao: MemberDao) {
     val readAllData: LiveData<List<Member>> = memberDao.readAllData()
+    val readAllDataByParty: LiveData<List<Member>> = memberDao.readAllDataByParty()
+
     var memberCount: Int = 0
 
     suspend fun addMembers() {
@@ -32,5 +36,7 @@ class MemberRepository(private val memberDao: MemberDao) {
     suspend fun updatePoints(member: Member) {
         memberDao.updatePoints(member)
     }
+
+    fun filterByParty(party: String) = memberDao.filterByParty(party)
 
 }

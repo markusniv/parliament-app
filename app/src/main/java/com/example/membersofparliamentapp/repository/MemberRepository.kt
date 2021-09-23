@@ -37,6 +37,8 @@ class MemberRepository(private val memberDao: MemberDao) {
         memberDao.updatePoints(member)
     }
 
+    fun readAllData() = memberDao.readAllData()
+
     fun filterByParty(party: String) = memberDao.filterByParty(party)
 
     fun filterByName(search: String) = memberDao.filterByName(search)

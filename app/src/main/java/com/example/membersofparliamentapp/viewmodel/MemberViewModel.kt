@@ -20,7 +20,6 @@ import kotlin.math.log
 
 class MemberViewModel : ViewModel() {
 
-    val readAllData: LiveData<List<Member>>
     val readAllDataByParty: LiveData<List<Member>>
     var currentFilter: Filter
 
@@ -29,7 +28,6 @@ class MemberViewModel : ViewModel() {
     init {
         val memberDao = MemberDatabase.getDatabase(MyApp.appContext).memberDao()
         repository = MemberRepository(memberDao)
-        readAllData = repository.readAllData
         readAllDataByParty = repository.readAllDataByParty
         currentFilter = Filter()
 
@@ -46,6 +44,8 @@ class MemberViewModel : ViewModel() {
             repository.updatePoints(member)
         }
     }
+
+    fun readAllData() = repository.readAllData()
 
     fun filterByParty(party: String) = repository.filterByParty(party)
 

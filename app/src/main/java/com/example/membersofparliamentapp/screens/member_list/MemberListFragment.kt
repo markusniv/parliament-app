@@ -202,7 +202,7 @@ class MemberListFragment : Fragment() {
             }
             Status.NONE -> {
                 Log.i("Fresh load", "We should've loaded fresh set of data")
-                mMemberViewModel.readAllData.observe(viewLifecycleOwner, { member ->
+                mMemberViewModel.readAllData().observe(viewLifecycleOwner, { member ->
                     adapter.setData(member)
                 })
             }

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_memberListFragment_to_memberInformationFragment"
             app:destination="@id/memberInformationFragment" />
+        <action
+            android:id="@+id/action_memberListFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/memberInformationFragment"
@@ -25,5 +28,14 @@
         <argument
             android:name="member"
             app:argType="com.example.membersofparliamentapp.model.Member" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.membersofparliamentapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_memberListFragment"
+            app:destination="@id/memberListFragment" />
     </fragment>
 </navigation>

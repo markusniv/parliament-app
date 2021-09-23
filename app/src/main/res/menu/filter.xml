@@ -10,7 +10,7 @@
         android:title="@string/restore"
         android:icon="@drawable/ic_restore"
         app:showAsAction="ifRoom"/>
-    <item android:id="@+id/filterMenu"
+    <item android:id="@+id/menuDropdown"
         android:title="@string/filters"
         android:icon="@drawable/ic_filters"
         app:showAsAction="ifRoom"/>

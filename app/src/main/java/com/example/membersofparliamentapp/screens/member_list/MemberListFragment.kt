@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.membersofparliamentapp.MainActivity
 import com.example.membersofparliamentapp.MyApp
@@ -78,7 +80,7 @@ class MemberListFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId)  {
-            R.id.filterMenu -> {
+            R.id.menuDropdown-> {
                 PopupMenu(
                     MyApp.appContext,
                     binding.anchorMenu,
@@ -86,67 +88,89 @@ class MemberListFragment : Fragment() {
                 ).apply {
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
-                            R.id.selectParty -> {
+                            R.id.menuFilters -> {
                                 PopupMenu(
                                     MyApp.appContext,
                                     binding.anchorMenu,
                                     Gravity.RIGHT
                                 ).apply {
-                                    setOnMenuItemClickListener { party ->
-                                        mMemberViewModel.currentFilter.currentStatus = Status.PARTY
-                                        when (party.itemId) {
-                                            R.id.filterKd -> {
-                                                setPartyGetList("kd")
+                                    setOnMenuItemClickListener { item ->
+                                        when (item.itemId) {
+                                            R.id.selectParty -> {
+                                                PopupMenu(
+                                                    MyApp.appContext,
+                                                    binding.anchorMenu,
+                                                    Gravity.RIGHT
+                                                ).apply {
+                                                    setOnMenuItemClickListener { party ->
+                                                        mMemberViewModel.currentFilter.currentStatus = Status.PARTY
+                                                        when (party.itemId) {
+                                                            R.id.filterKd -> {
+                                                                setPartyGetList("kd")
+                                                                true
+                                                            }
+                                                            R.id.filterKesk -> {
+                                                                setPartyGetList("kesk")
+                                                                true
+                                                            }
+                                                            R.id.filterKok -> {
+                                                                setPartyGetList("kok")
+                                                                true
+                                                            }
+                                                            R.id.filterLiik -> {
+                                                                setPartyGetList("liik")
+                                                                true
+                                                            }
+                                                            R.id.filterPs -> {
+                                                                setPartyGetList("ps")
+                                                                true
+                                                            }
+                                                            R.id.filterRkp -> {
+                                                                setPartyGetList("r")
+                                                                true
+                                                            }
+                                                            R.id.filterSd -> {
+                                                                setPartyGetList("sd")
+                                                                true
+                                                            }
+                                                            R.id.filterVihr -> {
+                                                                setPartyGetList("vihr")
+                                                                true
+                                                            }
+                                                            R.id.filterVas -> {
+                                                                setPartyGetList("vas")
+                                                                true
+                                                            }
+                                                            else -> false
+                                                        }
+                                                    }
+                                                    inflate(R.menu.dropdown_parties)
+                                                    show()
+                                                }
                                                 true
                                             }
-                                            R.id.filterKesk -> {
-                                                setPartyGetList("kesk")
-                                                true
-                                            }
-                                            R.id.filterKok -> {
-                                                setPartyGetList("kok")
-                                                true
-                                            }
-                                            R.id.filterLiik -> {
-                                                setPartyGetList("liik")
-                                                true
-                                            }
-                                            R.id.filterPs -> {
-                                                setPartyGetList("ps")
-                                                true
-                                            }
-                                            R.id.filterRkp -> {
-                                                setPartyGetList("r")
-                                                true
-                                            }
-                                            R.id.filterSd -> {
-                                                setPartyGetList("sd")
-                                                true
-                                            }
-                                            R.id.filterVihr -> {
-                                                setPartyGetList("vihr")
-                                                true
-                                            }
-                                            R.id.filterVas -> {
-                                                setPartyGetList("vas")
+                                            R.id.selectPerson -> {
+                                                getList()
                                                 true
                                             }
                                             else -> false
                                         }
                                     }
-                                    inflate(R.menu.dropdown_parties)
+                                    inflate(R.menu.dropdown_filters)
                                     show()
                                 }
                                 true
                             }
-                            R.id.selectPerson -> {
-                                getList()
+
+                            R.id.menuSettings -> {
+                                val action = MemberListFragmentDirections.actionMemberListFragmentToSettingsFragment()
+                                findNavController().navigate(action)
                                 true
                             }
                             else -> false
                         }
                     }
-                    inflate(R.menu.dropdown_filters)
+                    inflate(R.menu.dropdown_menu)
                     show()
                 }
             }
@@ -177,6 +201,7 @@ class MemberListFragment : Fragment() {
                 }
             }
             Status.NONE -> {
+                Log.i("Fresh load", "We should've loaded fresh set of data")
                 mMemberViewModel.readAllData.observe(viewLifecycleOwner, { member ->
                     adapter.setData(member)
                 })
@@ -196,8 +221,10 @@ class MemberListFragment : Fragment() {
     }
 
     private fun resetList() {
-        mMemberViewModel.currentFilter.currentParty = null
+        Log.i("reset", "Reset should've happened")
         mMemberViewModel.currentFilter.currentStatus = Status.NONE
+        mMemberViewModel.currentFilter.currentParty = null
+        mMemberViewModel.currentFilter.currentSearch = null
         getList()
     }
 

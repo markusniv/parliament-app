@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.data.Filter
 import com.example.membersofparliamentapp.data.MemberDatabase
+import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.network.MemberApi
 import com.example.membersofparliamentapp.repository.MemberRepository
@@ -45,10 +46,18 @@ class MemberViewModel : ViewModel() {
         }
     }
 
+    fun addComment(comment: Comment) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.addComment(comment)
+        }
+    }
+
     fun readAllData() = repository.readAllData()
 
     fun filterByParty(party: String) = repository.filterByParty(party)
 
     fun filterByName(search: String) = repository.filterByName(search)
+
+    fun getCommentsForMember(personNumber: Int) = repository.getCommentsForMember(personNumber)
 
 }

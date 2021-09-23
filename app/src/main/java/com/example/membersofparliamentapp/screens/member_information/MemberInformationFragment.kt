@@ -3,11 +3,8 @@ package com.example.membersofparliamentapp.screens.member_information
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
@@ -20,6 +17,7 @@ import com.example.membersofparliamentapp.functions.getPartyColor
 import com.example.membersofparliamentapp.functions.getPartyName
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.network.loadImageOnline
+import com.example.membersofparliamentapp.screens.member_list.MemberListFragmentDirections
 import com.example.membersofparliamentapp.viewmodel.MemberViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
 import com.squareup.picasso.Picasso
@@ -41,6 +39,8 @@ class MemberInformationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_information, container, false)
+
+        setHasOptionsMenu(true)
 
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
@@ -119,5 +119,19 @@ class MemberInformationFragment : Fragment() {
             currentPoints)
         updateDatabase(mMember)
         super.onDestroy()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.notes, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menuNotes -> {
+                val action = MemberInformationFragmentDirections.actionMemberInformationFragmentToCommentFragment(args.member)
+                findNavController().navigate(action)
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

@@ -28,6 +28,9 @@
         <argument
             android:name="member"
             app:argType="com.example.membersofparliamentapp.model.Member" />
+        <action
+            android:id="@+id/action_memberInformationFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -37,5 +40,32 @@
         <action
             android:id="@+id/action_settingsFragment_to_memberListFragment"
             app:destination="@id/memberListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.example.membersofparliamentapp.CommentFragment"
+        android:label="fragment_comment"
+        tools:layout="@layout/fragment_comment" >
+        <action
+            android:id="@+id/action_commentFragment_to_memberInformationFragment"
+            app:destination="@id/memberInformationFragment" />
+        <argument
+            android:name="member"
+            app:argType="com.example.membersofparliamentapp.model.Member" />
+        <action
+            android:id="@+id/action_commentFragment_to_addCommentFragment"
+            app:destination="@id/addCommentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCommentFragment"
+        android:name="com.example.membersofparliamentapp.AddCommentFragment"
+        android:label="fragment_add_comment"
+        tools:layout="@layout/fragment_add_comment" >
+        <action
+            android:id="@+id/action_addCommentFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
+        <argument
+            android:name="member"
+            app:argType="com.example.membersofparliamentapp.model.Member" />
     </fragment>
 </navigation>

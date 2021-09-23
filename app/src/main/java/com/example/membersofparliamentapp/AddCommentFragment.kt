@@ -1,0 +1,49 @@
+package com.example.membersofparliamentapp
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.example.membersofparliamentapp.databinding.FragmentAddCommentBinding
+import com.example.membersofparliamentapp.model.Comment
+import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentArgs
+import com.example.membersofparliamentapp.viewmodel.MemberViewModel
+import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
+
+private lateinit var binding: FragmentAddCommentBinding
+
+class AddCommentFragment : Fragment() {
+
+    private val args by navArgs<AddCommentFragmentArgs>()
+    private val mMemberViewModel : MemberViewModel by viewModels {
+        MemberViewModelFactory()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_comment, container, false)
+
+        binding.addCommentButton.setOnClickListener {
+            val commentText = binding.editTextComment.text.toString()
+            val commentPersonNumber = args.member.personNumber
+            if (commentText.isNotEmpty()) {
+                mMemberViewModel.addComment(Comment(0, commentPersonNumber, commentText))
+                val action = AddCommentFragmentDirections.actionAddCommentFragmentToCommentFragment(args.member)
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(MyApp.appContext, "Comment cannot be empty!", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        return binding.root
+    }
+}

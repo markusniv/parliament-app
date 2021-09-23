@@ -3,11 +3,14 @@ package com.example.membersofparliamentapp.data
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
+import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MemberDao {
+
+    // Member SQL queries
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addMember(member : Member)
@@ -29,5 +32,16 @@ interface MemberDao {
 
     @Update
     suspend fun updatePoints(member: Member)
+
+    // Comment SQL queries
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun addComment(comment : Comment)
+
+    @Query("SELECT * FROM comment_table")
+    fun readAllComments(): LiveData<List<Comment>>
+
+    @Query("SELECT * FROM comment_table WHERE personNumber LIKE :personNumber")
+    fun getMatchingComment(personNumber : Int): LiveData<List<Comment>>
 
 }

@@ -1,5 +1,8 @@
 package com.example.membersofparliamentapp.functions
 
+import android.app.Activity
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.model.Member
 
@@ -29,4 +32,9 @@ fun getPartyName(memb : Member) : String {
         "vihr" -> "Vihreät"
         else -> "Vasemmistoliitto"
     }
+}
+
+fun View.hideKeyboard() {
+    val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(this.windowToken, 0)
 }

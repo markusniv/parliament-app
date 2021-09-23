@@ -6,6 +6,7 @@ import androidx.constraintlayout.helper.widget.Flow
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.membersofparliamentapp.data.MemberDao
+import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.network.MemberApi
 
@@ -42,5 +43,9 @@ class MemberRepository(private val memberDao: MemberDao) {
     fun filterByParty(party: String) = memberDao.filterByParty(party)
 
     fun filterByName(search: String) = memberDao.filterByName(search)
+
+    fun getCommentsForMember(personNumber: Int) = memberDao.getMatchingComment(personNumber)
+
+    suspend fun addComment(comment: Comment) = memberDao.addComment(comment)
 
 }

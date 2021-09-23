@@ -26,4 +26,8 @@
     <string name="vas">Vasemmistoliitto</string>
     <string name="search">Search</string>
     <string name="settings">Settings</string>
+    <string name="addNote">Add comment</string>
+    <string name="notes">Comments</string>
+    <string name="empty_note">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="comment">Comment</string>
 </resources>

@@ -4,9 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
 
-@Database(entities = [Member::class], version = 1, exportSchema = false)
+@Database(entities = [Member::class, Comment::class], version = 1, exportSchema = false)
 abstract class MemberDatabase : RoomDatabase() {
 
     abstract fun memberDao(): MemberDao

@@ -6,6 +6,7 @@ import android.os.AsyncTask
 import android.util.Log
 import androidx.lifecycle.*
 import com.example.membersofparliamentapp.MyApp
+import com.example.membersofparliamentapp.data.Filter
 import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.network.MemberApi
@@ -21,6 +22,7 @@ class MemberViewModel : ViewModel() {
 
     val readAllData: LiveData<List<Member>>
     val readAllDataByParty: LiveData<List<Member>>
+    var currentFilter: Filter
 
     private val repository: MemberRepository
 
@@ -29,6 +31,7 @@ class MemberViewModel : ViewModel() {
         repository = MemberRepository(memberDao)
         readAllData = repository.readAllData
         readAllDataByParty = repository.readAllDataByParty
+        currentFilter = Filter()
 
     }
 

@@ -15,6 +15,8 @@ import com.example.membersofparliamentapp.MainActivity
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.adapters.MemberListAdapter
+import com.example.membersofparliamentapp.data.Filter
+import com.example.membersofparliamentapp.data.Status
 import com.example.membersofparliamentapp.databinding.FragmentMemberListBinding
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.viewmodel.MemberViewModel
@@ -23,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
 
 private lateinit var binding: FragmentMemberListBinding
+private lateinit var adapter: MemberListAdapter
 
 class MemberListFragment : Fragment() {
 
@@ -37,8 +40,13 @@ class MemberListFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_list, container, false)
 
+        adapter = MemberListAdapter()
+        val recyclerView = binding.memberListRecyclerView
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
         mMemberViewModel.addMembers()
-        getAllMembers()
+        getList()
         setHasOptionsMenu(true)
 
         return binding.root
@@ -65,41 +73,42 @@ class MemberListFragment : Fragment() {
                                     Gravity.RIGHT
                                 ).apply {
                                     setOnMenuItemClickListener { party ->
+                                        mMemberViewModel.currentFilter.currentStatus = Status.PARTY
                                         when (party.itemId) {
                                             R.id.filterKd -> {
-                                                getList("party", "kd")
+                                                setPartyGetList("kd")
                                                 true
                                             }
                                             R.id.filterKesk -> {
-                                                getList("party", "kesk")
+                                                setPartyGetList("kesk")
                                                 true
                                             }
                                             R.id.filterKok -> {
-                                                getList("party", "kok")
+                                                setPartyGetList("kok")
                                                 true
                                             }
                                             R.id.filterLiik -> {
-                                                getList("party", "liik")
+                                                setPartyGetList("liik")
                                                 true
                                             }
                                             R.id.filterPs -> {
-                                                getList("party", "ps")
+                                                setPartyGetList("ps")
                                                 true
                                             }
                                             R.id.filterRkp -> {
-                                                getList("party", "r")
+                                                setPartyGetList("r")
                                                 true
                                             }
                                             R.id.filterSd -> {
-                                                getList("party", "sd")
+                                                setPartyGetList("sd")
                                                 true
                                             }
                                             R.id.filterVihr -> {
-                                                getList("party", "vihr")
+                                                setPartyGetList("vihr")
                                                 true
                                             }
                                             R.id.filterVas -> {
-                                                getList("party", "vas")
+                                                setPartyGetList("vas")
                                                 true
                                             }
                                             else -> false
@@ -111,7 +120,7 @@ class MemberListFragment : Fragment() {
                                 true
                             }
                             R.id.selectPerson -> {
-                                getList("test", "none")
+                                getList()
                                 true
                             }
                             else -> false
@@ -121,46 +130,42 @@ class MemberListFragment : Fragment() {
                     show()
                 }
             }
-            R.id.filterRestore -> getAllMembers()
+            R.id.filterRestore -> {
+                resetList()
+            }
 
         }
         return super.onOptionsItemSelected(item)
     }
 
+    private fun getList() {
+        val filter = mMemberViewModel.currentFilter
 
-    private fun getList(filter : String, party : String) {
-
-        val adapter = MemberListAdapter()
-        val recyclerView = binding.memberListRecyclerView
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        when (filter) {
-            "party" -> {
-                mMemberViewModel.filterByParty(party).observe(viewLifecycleOwner, { member ->
+        when (filter.currentStatus) {
+            Status.PARTY -> {
+                filter.currentParty?.let {
+                    mMemberViewModel.filterByParty(it).observe(viewLifecycleOwner, { member ->
+                        adapter.setData(member)
+                    })
+                }
+            }
+            Status.NONE -> {
+                mMemberViewModel.readAllData.observe(viewLifecycleOwner, { member ->
                     adapter.setData(member)
                 })
-            }
-            "test" -> {
-                mMemberViewModel.readAllDataByParty.observe(viewLifecycleOwner, { member ->
-                    adapter.setData(member)
-                })
-            }
-            else -> {
-                getAllMembers()
             }
         }
     }
 
-    private fun getAllMembers() {
-        val adapter = MemberListAdapter()
-        val recyclerView = binding.memberListRecyclerView
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    private fun setPartyGetList(party : String) {
+        mMemberViewModel.currentFilter.currentParty = party
+        getList()
+    }
 
-        mMemberViewModel.readAllData.observe(viewLifecycleOwner, { member ->
-            adapter.setData(member)
-        })
+    private fun resetList() {
+        mMemberViewModel.currentFilter.currentParty = null
+        mMemberViewModel.currentFilter.currentStatus = Status.NONE
+        getList()
     }
 
 }

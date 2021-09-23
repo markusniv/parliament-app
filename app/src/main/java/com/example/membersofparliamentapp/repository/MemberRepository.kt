@@ -39,4 +39,6 @@ class MemberRepository(private val memberDao: MemberDao) {
 
     fun filterByParty(party: String) = memberDao.filterByParty(party)
 
+    fun filterByName(search: String) = memberDao.filterByName(search)
+
 }

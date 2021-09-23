@@ -54,6 +54,26 @@ class MemberListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.filter, menu)
+
+        val search = menu.findItem(R.id.searchByName)
+        val searchView = search.actionView as androidx.appcompat.widget.SearchView
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(object: androidx.appcompat.widget.
+        SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    setSearchGetList(query)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                if (newText != null) {
+                    setSearchGetList(newText)
+                }
+                return true
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -149,6 +169,13 @@ class MemberListFragment : Fragment() {
                     })
                 }
             }
+            Status.SEARCH -> {
+                filter.currentSearch?.let {
+                    mMemberViewModel.filterByName(it).observe(viewLifecycleOwner, { member ->
+                        adapter.setData(member)
+                    })
+                }
+            }
             Status.NONE -> {
                 mMemberViewModel.readAllData.observe(viewLifecycleOwner, { member ->
                     adapter.setData(member)
@@ -159,6 +186,12 @@ class MemberListFragment : Fragment() {
 
     private fun setPartyGetList(party : String) {
         mMemberViewModel.currentFilter.currentParty = party
+        getList()
+    }
+    private fun setSearchGetList(search : String) {
+        mMemberViewModel.currentFilter.currentStatus = Status.SEARCH
+        val searchText = "%$search%"
+        mMemberViewModel.currentFilter.currentSearch = searchText
         getList()
     }
 

@@ -24,6 +24,9 @@ interface MemberDao {
     @Query("SELECT * FROM member_table WHERE party like :party")
     fun filterByParty(party : String) : LiveData<List<Member>>
 
+    @Query("SELECT * FROM member_table WHERE first like :search OR last LIKE :search")
+    fun filterByName(search : String) : LiveData<List<Member>>
+
     @Update
     suspend fun updatePoints(member: Member)
 

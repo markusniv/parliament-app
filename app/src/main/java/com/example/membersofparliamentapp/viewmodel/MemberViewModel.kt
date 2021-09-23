@@ -49,4 +49,6 @@ class MemberViewModel : ViewModel() {
 
     fun filterByParty(party: String) = repository.filterByParty(party)
 
+    fun filterByName(search: String) = repository.filterByName(search)
+
 }

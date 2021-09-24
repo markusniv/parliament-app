@@ -1,8 +1,7 @@
 package com.example.membersofparliamentapp.screens.member_information
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.activity.OnBackPressedCallback
@@ -12,20 +11,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentMemberInformationBinding
-import com.example.membersofparliamentapp.databinding.FragmentMemberInformationBindingImpl
 import com.example.membersofparliamentapp.functions.getPartyColor
 import com.example.membersofparliamentapp.functions.getPartyName
 import com.example.membersofparliamentapp.model.Member
-import com.example.membersofparliamentapp.network.loadImageOnline
-import com.example.membersofparliamentapp.screens.member_list.MemberListFragmentDirections
 import com.example.membersofparliamentapp.viewmodel.MemberViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_member_information.*
-import java.util.concurrent.Executors
 
 private lateinit var binding: FragmentMemberInformationBinding
 private var currentPoints: Int = 0
+
+private lateinit var currentMember : Member
 
 class MemberInformationFragment : Fragment() {
 
@@ -40,6 +36,8 @@ class MemberInformationFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_information, container, false)
 
+        currentMember = args.member
+
         setHasOptionsMenu(true)
 
         val callback: OnBackPressedCallback =
@@ -49,7 +47,7 @@ class MemberInformationFragment : Fragment() {
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
-        currentPoints = args.member.pointsReceived
+        currentPoints = currentMember.pointsReceived
 
         getMember()
 
@@ -65,7 +63,7 @@ class MemberInformationFragment : Fragment() {
 
     // Get a member from the ParliamentMembersData object and edit the fragment views accordingly
     private fun getMember() {
-        val memb = args.member
+        val memb = currentMember
         binding.txtTitle.text = getMinistry(memb)
         Picasso.get().load("https://avoindata.eduskunta.fi/${memb.picture}").into(binding.imgMember)
         //binding.imgParty.setImageResource(getLogo(memb))
@@ -104,20 +102,7 @@ class MemberInformationFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        val tMember = args.member
-        val mMember = Member(
-            tMember.personNumber,
-            tMember.seatNumber,
-            tMember.last,
-            tMember.first,
-            tMember.party,
-            tMember.minister,
-            tMember.picture,
-            tMember.twitter,
-            tMember.bornYear,
-            tMember.constituency,
-            currentPoints)
-        updateDatabase(mMember)
+        updatePoints()
         super.onDestroy()
     }
 
@@ -128,10 +113,34 @@ class MemberInformationFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuNotes -> {
-                val action = MemberInformationFragmentDirections.actionMemberInformationFragmentToCommentFragment(args.member)
+                updatePoints()
+                val action = MemberInformationFragmentDirections.actionMemberInformationFragmentToCommentFragment(getTempMember(currentMember))
                 findNavController().navigate(action)
+            }
+            android.R.id.home -> {
+                requireActivity().onBackPressed()
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getTempMember(member: Member): Member {
+        return Member(
+            member.personNumber,
+            member.seatNumber,
+            member.last,
+            member.first,
+            member.party,
+            member.minister,
+            member.picture,
+            member.twitter,
+            member.bornYear,
+            member.constituency,
+            currentPoints
+        )
+    }
+
+    private fun updatePoints() {
+        updateDatabase(getTempMember(currentMember))
     }
 }

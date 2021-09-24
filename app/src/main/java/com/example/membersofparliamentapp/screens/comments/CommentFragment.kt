@@ -1,6 +1,7 @@
-package com.example.membersofparliamentapp
+package com.example.membersofparliamentapp.screens.comments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -9,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.adapters.CommentListAdapter
 import com.example.membersofparliamentapp.adapters.MemberListAdapter
 import com.example.membersofparliamentapp.databinding.FragmentCommentBinding
@@ -47,6 +49,7 @@ class CommentFragment : Fragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
+                    Log.i("Current Member", args.member.pointsReceived.toString())
                     val action = CommentFragmentDirections.actionCommentFragmentToMemberInformationFragment(args.member)
                     findNavController().navigate(action)
                 }
@@ -61,16 +64,19 @@ class CommentFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        return when (item.itemId) {
             R.id.menuAddNote -> {
                 val action = CommentFragmentDirections.actionCommentFragmentToAddCommentFragment(args.member)
                 findNavController().navigate(action)
+                true
             }
             android.R.id.home -> {
                 requireActivity().onBackPressed()
+                true
             }
+            else -> false
         }
-        return super.onOptionsItemSelected(item)
+        //return super.onOptionsItemSelected(item)
     }
 
 }

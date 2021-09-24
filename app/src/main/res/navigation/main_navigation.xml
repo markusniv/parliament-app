@@ -34,8 +34,8 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.example.membersofparliamentapp.SettingsFragment"
-        android:label="fragment_settings"
+        android:name="com.example.membersofparliamentapp.screens.settings.SettingsFragment"
+        android:label="Settings"
         tools:layout="@layout/fragment_settings" >
         <action
             android:id="@+id/action_settingsFragment_to_memberListFragment"
@@ -43,8 +43,8 @@
     </fragment>
     <fragment
         android:id="@+id/commentFragment"
-        android:name="com.example.membersofparliamentapp.CommentFragment"
-        android:label="fragment_comment"
+        android:name="com.example.membersofparliamentapp.screens.comments.CommentFragment"
+        android:label="Comments"
         tools:layout="@layout/fragment_comment" >
         <action
             android:id="@+id/action_commentFragment_to_memberInformationFragment"
@@ -58,8 +58,8 @@
     </fragment>
     <fragment
         android:id="@+id/addCommentFragment"
-        android:name="com.example.membersofparliamentapp.AddCommentFragment"
-        android:label="fragment_add_comment"
+        android:name="com.example.membersofparliamentapp.screens.comments.AddCommentFragment"
+        android:label="Add a comment"
         tools:layout="@layout/fragment_add_comment" >
         <action
             android:id="@+id/action_addCommentFragment_to_commentFragment"

@@ -1,4 +1,4 @@
-package com.example.membersofparliamentapp
+package com.example.membersofparliamentapp.screens.comments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.membersofparliamentapp.MyApp
+import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentAddCommentBinding
 import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentArgs

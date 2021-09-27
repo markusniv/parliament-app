@@ -14,8 +14,8 @@ import com.example.membersofparliamentapp.databinding.FragmentMemberInformationB
 import com.example.membersofparliamentapp.functions.getPartyColor
 import com.example.membersofparliamentapp.functions.getPartyName
 import com.example.membersofparliamentapp.model.Member
-import com.example.membersofparliamentapp.viewmodel.MemberViewModel
-import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
+import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModel
+import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModelFactory
 import com.squareup.picasso.Picasso
 
 private lateinit var binding: FragmentMemberInformationBinding
@@ -26,8 +26,8 @@ private lateinit var currentMember : Member
 class MemberInformationFragment : Fragment() {
 
     private val args by navArgs<MemberInformationFragmentArgs>()
-    private val mMemberViewModel : MemberViewModel by viewModels {
-        MemberViewModelFactory()
+    private val mMemberInformationViewModel : MemberInformationViewModel by viewModels {
+        MemberInformationViewModelFactory()
     }
 
     override fun onCreateView(
@@ -98,12 +98,7 @@ class MemberInformationFragment : Fragment() {
     }
 
     private fun updateDatabase(member: Member) {
-        mMemberViewModel.updatePoints(member)
-    }
-
-    override fun onDestroy() {
-        updatePoints()
-        super.onDestroy()
+        mMemberInformationViewModel.updatePoints(member)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -118,6 +113,7 @@ class MemberInformationFragment : Fragment() {
                 findNavController().navigate(action)
             }
             android.R.id.home -> {
+                updatePoints()
                 requireActivity().onBackPressed()
             }
         }

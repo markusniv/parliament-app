@@ -11,8 +11,6 @@ import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.network.MemberApi
 
 class MemberRepository(private val memberDao: MemberDao) {
-    val readAllData: LiveData<List<Member>> = memberDao.readAllData()
-    val readAllDataByParty: LiveData<List<Member>> = memberDao.readAllDataByParty()
 
     var memberCount: Int = 0
 
@@ -34,11 +32,9 @@ class MemberRepository(private val memberDao: MemberDao) {
         }
     }
 
-    suspend fun updatePoints(member: Member) {
-        memberDao.updatePoints(member)
-    }
-
     fun readAllData() = memberDao.readAllData()
+
+    fun readAllDataByParty() = memberDao.readAllDataByParty()
 
     fun filterByParty(party: String) = memberDao.filterByParty(party)
 
@@ -47,5 +43,7 @@ class MemberRepository(private val memberDao: MemberDao) {
     fun getCommentsForMember(personNumber: Int) = memberDao.getMatchingComment(personNumber)
 
     suspend fun addComment(comment: Comment) = memberDao.addComment(comment)
+
+    suspend fun updatePoints(member: Member) = memberDao.updatePoints(member)
 
 }

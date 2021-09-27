@@ -15,30 +15,29 @@ import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentAddCommentBinding
 import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentArgs
-import com.example.membersofparliamentapp.viewmodel.MemberViewModel
-import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
+import com.example.membersofparliamentapp.viewmodel.AddCommentViewModel
+import com.example.membersofparliamentapp.viewmodel.AddCommentViewModelFactory
 
 private lateinit var binding: FragmentAddCommentBinding
 
 class AddCommentFragment : Fragment() {
 
     private val args by navArgs<AddCommentFragmentArgs>()
-    private val mMemberViewModel : MemberViewModel by viewModels {
-        MemberViewModelFactory()
+    private val mAddCommentViewModel : AddCommentViewModel by viewModels {
+        AddCommentViewModelFactory()
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_comment, container, false)
 
         binding.addCommentButton.setOnClickListener {
             val commentText = binding.editTextComment.text.toString()
             val commentPersonNumber = args.member.personNumber
             if (commentText.isNotEmpty()) {
-                mMemberViewModel.addComment(Comment(0, commentPersonNumber, commentText))
+                mAddCommentViewModel.addComment(Comment(0, commentPersonNumber, commentText))
                 val action = AddCommentFragmentDirections.actionAddCommentFragmentToCommentFragment(args.member)
                 findNavController().navigate(action)
             } else {

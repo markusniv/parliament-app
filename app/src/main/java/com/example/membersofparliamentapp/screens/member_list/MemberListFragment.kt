@@ -4,35 +4,26 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.PopupMenu
-import android.widget.Toolbar
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.membersofparliamentapp.MainActivity
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.adapters.MemberListAdapter
-import com.example.membersofparliamentapp.data.Filter
 import com.example.membersofparliamentapp.data.Status
 import com.example.membersofparliamentapp.databinding.FragmentMemberListBinding
-import com.example.membersofparliamentapp.model.Member
-import com.example.membersofparliamentapp.viewmodel.MemberViewModel
-import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
+import com.example.membersofparliamentapp.viewmodel.MemberListViewModel
+import com.example.membersofparliamentapp.viewmodel.MemberListViewModelFactory
 
 private lateinit var binding: FragmentMemberListBinding
 private lateinit var adapter: MemberListAdapter
 
 class MemberListFragment : Fragment() {
 
-    private val mMemberViewModel : MemberViewModel by viewModels {
-        MemberViewModelFactory()
+    private val mMemberListViewModel : MemberListViewModel by viewModels {
+        MemberListViewModelFactory()
     }
 
     override fun onCreateView(
@@ -47,7 +38,7 @@ class MemberListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        mMemberViewModel.addMembers()
+        mMemberListViewModel.addMembers()
         getList()
         setHasOptionsMenu(true)
 
@@ -103,7 +94,7 @@ class MemberListFragment : Fragment() {
                                                     Gravity.RIGHT
                                                 ).apply {
                                                     setOnMenuItemClickListener { party ->
-                                                        mMemberViewModel.currentFilter.currentStatus = Status.PARTY
+                                                        mMemberListViewModel.currentFilter.currentStatus = Status.PARTY
                                                         when (party.itemId) {
                                                             R.id.filterKd -> {
                                                                 setPartyGetList("kd")
@@ -183,26 +174,26 @@ class MemberListFragment : Fragment() {
     }
 
     private fun getList() {
-        val filter = mMemberViewModel.currentFilter
+        val filter = mMemberListViewModel.currentFilter
 
         when (filter.currentStatus) {
             Status.PARTY -> {
                 filter.currentParty?.let {
-                    mMemberViewModel.filterByParty(it).observe(viewLifecycleOwner, { member ->
+                    mMemberListViewModel.filterByParty(it).observe(viewLifecycleOwner, { member ->
                         adapter.setData(member)
                     })
                 }
             }
             Status.SEARCH -> {
                 filter.currentSearch?.let {
-                    mMemberViewModel.filterByName(it).observe(viewLifecycleOwner, { member ->
+                    mMemberListViewModel.filterByName(it).observe(viewLifecycleOwner, { member ->
                         adapter.setData(member)
                     })
                 }
             }
             Status.NONE -> {
                 Log.i("Fresh load", "We should've loaded fresh set of data")
-                mMemberViewModel.readAllData().observe(viewLifecycleOwner, { member ->
+                mMemberListViewModel.readAllData().observe(viewLifecycleOwner, { member ->
                     adapter.setData(member)
                 })
             }
@@ -210,21 +201,21 @@ class MemberListFragment : Fragment() {
     }
 
     private fun setPartyGetList(party : String) {
-        mMemberViewModel.currentFilter.currentParty = party
+        mMemberListViewModel.currentFilter.currentParty = party
         getList()
     }
     private fun setSearchGetList(search : String) {
-        mMemberViewModel.currentFilter.currentStatus = Status.SEARCH
+        mMemberListViewModel.currentFilter.currentStatus = Status.SEARCH
         val searchText = "%$search%"
-        mMemberViewModel.currentFilter.currentSearch = searchText
+        mMemberListViewModel.currentFilter.currentSearch = searchText
         getList()
     }
 
     private fun resetList() {
         Log.i("reset", "Reset should've happened")
-        mMemberViewModel.currentFilter.currentStatus = Status.NONE
-        mMemberViewModel.currentFilter.currentParty = null
-        mMemberViewModel.currentFilter.currentSearch = null
+        mMemberListViewModel.currentFilter.currentStatus = Status.NONE
+        mMemberListViewModel.currentFilter.currentParty = null
+        mMemberListViewModel.currentFilter.currentSearch = null
         getList()
     }
 

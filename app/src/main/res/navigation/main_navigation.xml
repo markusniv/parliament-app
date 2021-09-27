@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_member_list" >
         <action
             android:id="@+id/action_memberListFragment_to_memberInformationFragment"
-            app:destination="@id/memberInformationFragment" />
+            app:destination="@id/memberInformationFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
         <action
             android:id="@+id/action_memberListFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
@@ -24,7 +26,8 @@
         tools:layout="@layout/fragment_member_information" >
         <action
             android:id="@+id/action_memberInformationFragment_to_memberListFragment"
-            app:destination="@id/memberListFragment" />
+            app:destination="@id/memberListFragment"
+            app:enterAnim="@android:anim/fade_in" />
         <argument
             android:name="member"
             app:argType="com.example.membersofparliamentapp.model.Member" />
@@ -48,7 +51,8 @@
         tools:layout="@layout/fragment_comment" >
         <action
             android:id="@+id/action_commentFragment_to_memberInformationFragment"
-            app:destination="@id/memberInformationFragment" />
+            app:destination="@id/memberInformationFragment"
+            app:enterAnim="@android:anim/fade_in" />
         <argument
             android:name="member"
             app:argType="com.example.membersofparliamentapp.model.Member" />

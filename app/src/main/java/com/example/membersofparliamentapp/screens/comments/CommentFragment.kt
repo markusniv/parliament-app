@@ -16,16 +16,16 @@ import com.example.membersofparliamentapp.adapters.MemberListAdapter
 import com.example.membersofparliamentapp.databinding.FragmentCommentBinding
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentArgs
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentDirections
-import com.example.membersofparliamentapp.viewmodel.MemberViewModel
-import com.example.membersofparliamentapp.viewmodel.MemberViewModelFactory
+import com.example.membersofparliamentapp.viewmodel.CommentViewModel
+import com.example.membersofparliamentapp.viewmodel.CommentViewModelFactory
 
 private lateinit var binding: FragmentCommentBinding
 
 class CommentFragment : Fragment() {
 
     private val args by navArgs<CommentFragmentArgs>()
-    private val mMemberViewModel : MemberViewModel by viewModels {
-        MemberViewModelFactory()
+    private val mCommentViewModel : CommentViewModel by viewModels {
+        CommentViewModelFactory()
     }
 
     override fun onCreateView(
@@ -40,7 +40,7 @@ class CommentFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        mMemberViewModel.getCommentsForMember(args.member.personNumber).observe(viewLifecycleOwner, { comment ->
+        mCommentViewModel.getCommentsForMember(args.member.personNumber).observe(viewLifecycleOwner, { comment ->
             adapter.setData(comment)
         })
 

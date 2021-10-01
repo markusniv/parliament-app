@@ -38,7 +38,6 @@ class MemberListFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        mMemberListViewModel.addMembers()
         getList()
         setHasOptionsMenu(true)
 

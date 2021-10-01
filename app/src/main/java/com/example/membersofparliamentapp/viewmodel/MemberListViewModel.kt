@@ -3,29 +3,29 @@ package com.example.membersofparliamentapp.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.data.Filter
 import com.example.membersofparliamentapp.data.MemberDatabase
+import com.example.membersofparliamentapp.network.DownloadWorker
 import com.example.membersofparliamentapp.repository.MemberRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 
 class MemberListViewModel : ViewModel() {
 
     var currentFilter: Filter
-
     private val repository: MemberRepository
+
+    private val periodicWorkRequest = PeriodicWorkRequestBuilder<DownloadWorker>(24, TimeUnit.HOURS).build()
 
     init {
         val memberDao = MemberDatabase.getDatabase(MyApp.appContext).memberDao()
         repository = MemberRepository(memberDao)
         currentFilter = Filter()
-    }
-
-    fun addMembers() {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.addMembers()
-        }
+        WorkManager.getInstance(MyApp.appContext).enqueue(periodicWorkRequest)
     }
 
     fun readAllData() = repository.readAllData()

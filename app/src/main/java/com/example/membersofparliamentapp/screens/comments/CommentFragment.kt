@@ -1,25 +1,34 @@
 package com.example.membersofparliamentapp.screens.comments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.adapters.CommentListAdapter
 import com.example.membersofparliamentapp.adapters.MemberListAdapter
+import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.databinding.FragmentCommentBinding
+import com.example.membersofparliamentapp.model.Comment
+import com.example.membersofparliamentapp.repository.MemberRepository
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentArgs
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentDirections
 import com.example.membersofparliamentapp.viewmodel.CommentViewModel
 import com.example.membersofparliamentapp.viewmodel.CommentViewModelFactory
 
 private lateinit var binding: FragmentCommentBinding
+private lateinit var adapter: CommentListAdapter
 
 class CommentFragment : Fragment() {
 
@@ -35,7 +44,7 @@ class CommentFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_comment, container, false)
 
-        val adapter = CommentListAdapter()
+        adapter = mCommentViewModel.adapter
         val recyclerView = binding.commentFragmentRv
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -44,12 +53,17 @@ class CommentFragment : Fragment() {
             adapter.setData(comment)
         })
 
+        mCommentViewModel.getSelectedCommentsLiveData().observe(viewLifecycleOwner, {
+            mCommentViewModel.commentsSelected = mCommentViewModel.getSelectedCommentsList().size > 0
+            setActionBarTitle()
+            requireActivity().invalidateOptionsMenu()
+        })
+
         setHasOptionsMenu(true)
 
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    Log.i("Current Member", args.member.pointsReceived.toString())
                     val action = CommentFragmentDirections.actionCommentFragmentToMemberInformationFragment(args.member)
                     findNavController().navigate(action)
                 }
@@ -60,7 +74,12 @@ class CommentFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.note_add, menu)
+        if (!mCommentViewModel.commentsSelected) {
+            inflater.inflate(R.menu.note_add, menu)
+        } else {
+            inflater.inflate(R.menu.delete_menu, menu)
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -70,13 +89,44 @@ class CommentFragment : Fragment() {
                 findNavController().navigate(action)
                 true
             }
+            R.id.menuDelete -> {
+                val builder = AlertDialog.Builder(activity)
+                builder.setMessage("Are you sure you wish to delete the selected comments?")
+                builder.setTitle("Confirm")
+                builder.setCancelable(true)
+                builder.setPositiveButton("Yes") { _, _ ->
+                    deleteComments()
+                }
+                builder.setNegativeButton("No") { dialog, _ ->
+                    dialog.cancel()
+                }
+                builder.show()
+                true
+            }
             android.R.id.home -> {
                 requireActivity().onBackPressed()
                 true
             }
             else -> false
         }
-        //return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteComments() {
+        mCommentViewModel.commentsSelected = false
+        setActionBarTitle()
+        requireActivity().invalidateOptionsMenu()
+        for (comment in mCommentViewModel.getSelectedCommentsList()) {
+            mCommentViewModel.deleteComment(comment)
+        }
+        mCommentViewModel.emptySelectedCommentsList()
+    }
+
+    private fun setActionBarTitle() {
+        if (mCommentViewModel.commentsSelected) {
+            (activity as AppCompatActivity).supportActionBar?.title = "Delete comments"
+        } else {
+            (activity as AppCompatActivity).supportActionBar?.title = "Comments"
+        }
     }
 
 }

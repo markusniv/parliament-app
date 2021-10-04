@@ -2,6 +2,7 @@ package com.example.membersofparliamentapp.adapters
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -34,16 +35,16 @@ class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>
             with(commentList[position]) {
                 binding.singleListCommentText.text = this.content
                 binding.singleListComment.setOnLongClickListener {
-                    it.setBackgroundColor(MyApp.appResources.getColor(R.color.design_default_color_primary))
-                    it.background.alpha = 20
-                    addSelectedComment(this)
+                    setSelectedView(it, this)
                     true
                 }
                 binding.singleListComment.setOnClickListener {
                     it.setBackgroundColor(MyApp.appResources.getColor(R.color.cardview_light_background))
-                    removeSelectedComment(this)
+                    if (this in selectedCommentsList) removeSelectedComment(this)
+                    else if (this !in selectedCommentsList && selectedCommentsList.isNotEmpty()) {
+                        setSelectedView(it, this)
+                    }
                 }
-                TODO("Make it so you only have to long click once and then can simply click the rest.")
             }
         }
     }
@@ -65,7 +66,7 @@ class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>
         selectedCommentsLiveData.notifyObserver()
     }
 
-    fun removeSelectedComment(comment: Comment) {
+    private fun removeSelectedComment(comment: Comment) {
         selectedCommentsLiveData.value?.remove(comment)
         selectedCommentsList.remove(comment)
         selectedCommentsLiveData.notifyObserver()
@@ -74,6 +75,12 @@ class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>
     fun emptySelectedCommentsList() {
         selectedCommentsLiveData.value?.clear()
         selectedCommentsList.clear()
+    }
+
+    private fun setSelectedView(view : View, comment: Comment) {
+        view.setBackgroundColor(MyApp.appResources.getColor(R.color.design_default_color_primary))
+        view.background.alpha = 20
+        addSelectedComment(comment)
     }
 
 }

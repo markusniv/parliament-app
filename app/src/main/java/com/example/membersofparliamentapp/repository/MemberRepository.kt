@@ -24,6 +24,8 @@ class MemberRepository(private val memberDao: MemberDao) {
         }
     }
 
+    // Member functions
+
     fun readAllData() = memberDao.readAllData()
 
     fun readAllDataByParty() = memberDao.readAllDataByParty()
@@ -32,10 +34,14 @@ class MemberRepository(private val memberDao: MemberDao) {
 
     fun filterByName(search: String) = memberDao.filterByName(search)
 
+    suspend fun updatePoints(member: Member) = memberDao.updatePoints(member)
+
+    // Comment functions
+
     fun getCommentsForMember(personNumber: Int) = memberDao.getMatchingComment(personNumber)
 
     suspend fun addComment(comment: Comment) = memberDao.addComment(comment)
 
-    suspend fun updatePoints(member: Member) = memberDao.updatePoints(member)
+    suspend fun deleteComment(comment: Comment) = memberDao.deleteComment(comment)
 
 }

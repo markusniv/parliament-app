@@ -21,6 +21,12 @@ class CommentViewModel : ViewModel() {
     }
 
     fun getCommentsForMember(personNumber: Int) = repository.getCommentsForMember(personNumber)
+
+    fun deleteComment(comment: Comment) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteComment(comment)
+        }
+    }
 }
 
 class CommentViewModelFactory() : ViewModelProvider.Factory {

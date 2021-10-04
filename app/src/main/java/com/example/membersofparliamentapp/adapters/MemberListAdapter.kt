@@ -52,7 +52,4 @@ class MemberListAdapter : RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
         this.memberList = member
         notifyDataSetChanged()
     }
-
-
-
 }

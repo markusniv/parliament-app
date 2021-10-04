@@ -44,4 +44,7 @@ interface MemberDao {
     @Query("SELECT * FROM comment_table WHERE personNumber LIKE :personNumber")
     fun getMatchingComment(personNumber : Int): LiveData<List<Comment>>
 
+    @Delete
+    suspend fun deleteComment(comment: Comment)
+
 }

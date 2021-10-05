@@ -11,6 +11,7 @@ import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.CommentViewBinding
 import com.example.membersofparliamentapp.model.Comment
+import com.example.membersofparliamentapp.screens.comments.CommentFragment
 import com.example.membersofparliamentapp.viewmodel.CommentViewModel
 
 class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>() {
@@ -33,14 +34,14 @@ class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(commentList[position]) {
+                setUnselectedView(binding.singleListComment, this)
                 binding.singleListCommentText.text = this.content
                 binding.singleListComment.setOnLongClickListener {
                     setSelectedView(it, this)
                     true
                 }
                 binding.singleListComment.setOnClickListener {
-                    it.setBackgroundColor(MyApp.appResources.getColor(R.color.cardview_light_background))
-                    if (this in selectedCommentsList) removeSelectedComment(this)
+                    if (this in selectedCommentsList) setUnselectedView(it, this)
                     else if (this !in selectedCommentsList && selectedCommentsList.isNotEmpty()) {
                         setSelectedView(it, this)
                     }
@@ -75,6 +76,7 @@ class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>
     fun emptySelectedCommentsList() {
         selectedCommentsLiveData.value?.clear()
         selectedCommentsList.clear()
+        selectedCommentsLiveData.notifyObserver()
     }
 
     private fun setSelectedView(view : View, comment: Comment) {
@@ -82,5 +84,11 @@ class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>
         view.background.alpha = 20
         addSelectedComment(comment)
     }
+
+    private fun setUnselectedView(view : View, comment: Comment) {
+        view.setBackgroundColor(MyApp.appResources.getColor(R.color.cardview_light_background))
+        removeSelectedComment(comment)
+    }
+
 
 }

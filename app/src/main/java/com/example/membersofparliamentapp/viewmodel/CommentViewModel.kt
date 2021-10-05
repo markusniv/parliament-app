@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class CommentViewModel : ViewModel() {
     private val repository: MemberRepository
-    val adapter = CommentListAdapter()
+    var adapter = CommentListAdapter()
     var commentsSelected : Boolean = false
 
     init {

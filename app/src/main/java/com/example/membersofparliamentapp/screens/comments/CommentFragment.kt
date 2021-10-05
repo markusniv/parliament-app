@@ -27,6 +27,14 @@ import com.example.membersofparliamentapp.screens.member_information.MemberInfor
 import com.example.membersofparliamentapp.viewmodel.CommentViewModel
 import com.example.membersofparliamentapp.viewmodel.CommentViewModelFactory
 
+/** (c) Markus Nivasalo, 16.9.2021
+ *
+ *      The fragment that displays once the user clicks the comment menu button in
+ *      MemberInformationFragment. Includes a RecyclerView of comments left for the current member.
+ *      The user can long click on a comment to start choosing comments for possible deletion. The
+ *      default menu button takes the user to AddCommentFragment.
+ */
+
 private lateinit var binding: FragmentCommentBinding
 private lateinit var adapter: CommentListAdapter
 
@@ -76,8 +84,10 @@ class CommentFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         if (!mCommentViewModel.commentsSelected) {
             inflater.inflate(R.menu.note_add, menu)
+            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         } else {
             inflater.inflate(R.menu.delete_menu, menu)
+            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         }
 
     }

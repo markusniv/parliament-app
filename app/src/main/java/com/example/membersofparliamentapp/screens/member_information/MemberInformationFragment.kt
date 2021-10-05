@@ -18,6 +18,14 @@ import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModelFactory
 import com.squareup.picasso.Picasso
 
+/** (c) Markus Nivasalo, 16.9.2021
+ *
+ *      The fragment that displays once the user clicks on a mp in MemberListFragment. Shows basic
+ *      information of the mp, including name, party, age and constituency. Also allows the user
+ *      to add or reduce points from the member, saving this rating into the RoomDB. Menu button
+ *      allows access to the CommentFragment.
+ */
+
 private lateinit var binding: FragmentMemberInformationBinding
 private var currentPoints: Int = 0
 

@@ -17,6 +17,13 @@ import com.example.membersofparliamentapp.databinding.FragmentMemberListBinding
 import com.example.membersofparliamentapp.viewmodel.MemberListViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberListViewModelFactory
 
+/** (c) Markus Nivasalo, 16.9.2021
+ *
+ *      The main fragment of the application, displaying a list of parliament members in a
+ *      RecyclerView. Also includes drop-down menus in the toolbar for moving to settings and
+ *      filtering the members, as well as search option so the user can search by mp names.
+ */
+
 private lateinit var binding: FragmentMemberListBinding
 private lateinit var adapter: MemberListAdapter
 

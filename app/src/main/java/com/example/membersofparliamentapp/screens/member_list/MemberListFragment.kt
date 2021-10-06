@@ -37,6 +37,7 @@ class MemberListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mMemberListViewModel.addScores()
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_list, container, false)
 
@@ -198,7 +199,6 @@ class MemberListFragment : Fragment() {
                 }
             }
             Status.NONE -> {
-                Log.i("Fresh load", "We should've loaded fresh set of data")
                 mMemberListViewModel.readAllData().observe(viewLifecycleOwner, { member ->
                     adapter.setData(member)
                 })

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
+import com.example.membersofparliamentapp.model.Score
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -30,9 +31,6 @@ interface MemberDao {
     @Query("SELECT * FROM member_table WHERE first like :search OR last LIKE :search")
     fun filterByName(search : String) : LiveData<List<Member>>
 
-    @Update
-    suspend fun updatePoints(member: Member)
-
     // Comment SQL queries
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -46,5 +44,19 @@ interface MemberDao {
 
     @Delete
     suspend fun deleteComment(comment: Comment)
+
+    // Score SQL queries
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addScore(score: Score)
+
+    @Update
+    suspend fun updateScore(score: Score)
+
+    @Query("SELECT COUNT(*) from score_table")
+    suspend fun getScoreCount() : Int
+
+    @Query("SELECT * FROM score_table WHERE personNumber like :personNumber")
+    fun getCurrentScore(personNumber: Int): LiveData<Score>
 
 }

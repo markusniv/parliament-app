@@ -6,16 +6,17 @@ import androidx.lifecycle.viewModelScope
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.model.Comment
+import com.example.membersofparliamentapp.repository.CommentRepository
 import com.example.membersofparliamentapp.repository.MemberRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddCommentViewModel : ViewModel() {
-    private val repository: MemberRepository
+    private val repository: CommentRepository
 
     init {
         val memberDao = MemberDatabase.getDatabase(MyApp.appContext).memberDao()
-        repository = MemberRepository(memberDao)
+        repository = CommentRepository(memberDao)
     }
 
     fun addComment(comment: Comment) {

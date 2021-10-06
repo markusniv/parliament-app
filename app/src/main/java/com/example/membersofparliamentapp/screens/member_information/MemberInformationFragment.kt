@@ -14,6 +14,7 @@ import com.example.membersofparliamentapp.databinding.FragmentMemberInformationB
 import com.example.membersofparliamentapp.functions.getPartyColor
 import com.example.membersofparliamentapp.functions.getPartyName
 import com.example.membersofparliamentapp.model.Member
+import com.example.membersofparliamentapp.model.Score
 import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModelFactory
 import com.squareup.picasso.Picasso
@@ -45,6 +46,10 @@ class MemberInformationFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_information, container, false)
 
         currentMember = args.member
+        mMemberInformationViewModel.getCurrentScore(currentMember.personNumber).observe(viewLifecycleOwner, {
+            currentPoints = it.score
+            updateUi()
+        })
 
         setHasOptionsMenu(true)
 
@@ -55,7 +60,6 @@ class MemberInformationFragment : Fragment() {
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
-        currentPoints = currentMember.pointsReceived
 
         getMember()
 
@@ -102,11 +106,11 @@ class MemberInformationFragment : Fragment() {
 
     private fun updatePoints(amount: Int) {
         currentPoints += amount
-        binding.pointView.text = currentPoints.toString()
+        updateUi()
     }
 
-    private fun updateDatabase(member: Member) {
-        mMemberInformationViewModel.updatePoints(member)
+    private fun updateDatabase(score: Score) {
+        mMemberInformationViewModel.updatePoints(score)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -116,35 +120,23 @@ class MemberInformationFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menuNotes -> {
-                updatePoints()
-                val action = MemberInformationFragmentDirections.actionMemberInformationFragmentToCommentFragment(getTempMember(currentMember))
+                val score = Score(currentMember.personNumber, currentPoints)
+                Log.i("score", score.toString())
+                updateDatabase(score)
+                val action = MemberInformationFragmentDirections.actionMemberInformationFragmentToCommentFragment(currentMember)
                 findNavController().navigate(action)
             }
             android.R.id.home -> {
-                updatePoints()
+                val score = Score(currentMember.personNumber, currentPoints)
+                updateDatabase(score)
                 requireActivity().onBackPressed()
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getTempMember(member: Member): Member {
-        return Member(
-            member.personNumber,
-            member.seatNumber,
-            member.last,
-            member.first,
-            member.party,
-            member.minister,
-            member.picture,
-            member.twitter,
-            member.bornYear,
-            member.constituency,
-            currentPoints
-        )
+    private fun updateUi() {
+        binding.pointView.text = currentPoints.toString()
     }
 
-    private fun updatePoints() {
-        updateDatabase(getTempMember(currentMember))
-    }
 }

@@ -10,18 +10,19 @@ import com.example.membersofparliamentapp.data.Filter
 import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
+import com.example.membersofparliamentapp.repository.CommentRepository
 import com.example.membersofparliamentapp.repository.MemberRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CommentViewModel : ViewModel() {
-    private val repository: MemberRepository
+    private val repository: CommentRepository
     var adapter = CommentListAdapter()
     var commentsSelected : Boolean = false
 
     init {
         val memberDao = MemberDatabase.getDatabase(MyApp.appContext).memberDao()
-        repository = MemberRepository(memberDao)
+        repository = CommentRepository(memberDao)
     }
 
     fun getCommentsForMember(personNumber: Int) = repository.getCommentsForMember(personNumber)

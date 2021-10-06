@@ -57,6 +57,8 @@ class CommentFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        Log.i("Comment member", args.member.toString())
+
         mCommentViewModel.getCommentsForMember(args.member.personNumber).observe(viewLifecycleOwner, { comment ->
             adapter.setData(comment)
         })

@@ -18,6 +18,5 @@ data class Member (
     val picture: String = "",
     val twitter: String = "",
     val bornYear: Int = 0,
-    val constituency: String = "",
-    val pointsReceived: Int = 0
+    val constituency: String = ""
 ) : Parcelable

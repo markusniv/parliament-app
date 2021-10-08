@@ -3,8 +3,9 @@ package com.example.membersofparliamentapp.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-/** 6.10.2021
+/** (c) Markus Nivasalo, 6.10.2021
  *
+ *      Data class for the scores of each parliament member.
  */
 
 @Entity(tableName = "score_table")

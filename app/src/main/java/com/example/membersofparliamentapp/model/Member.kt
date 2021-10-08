@@ -5,6 +5,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+/** (c) Markus Nivasalo, 16.9.2021
+ *
+ *      Data class for all the parliament members.
+ */
+
 @Parcelize
 @Entity(tableName = "member_table")
 data class Member (

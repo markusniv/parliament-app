@@ -11,6 +11,11 @@ import com.example.membersofparliamentapp.repository.MemberRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+/**     (c) Markus Nivasalo, 27.9.2021
+ *
+ *      ViewModel-class for the AddCommentFragment.
+ */
+
 class AddCommentViewModel : ViewModel() {
     private val repository: CommentRepository
 

@@ -27,7 +27,7 @@ import com.example.membersofparliamentapp.screens.member_information.MemberInfor
 import com.example.membersofparliamentapp.viewmodel.CommentViewModel
 import com.example.membersofparliamentapp.viewmodel.CommentViewModelFactory
 
-/** (c) Markus Nivasalo, 16.9.2021
+/**     (c) Markus Nivasalo, 16.9.2021
  *
  *      The fragment that displays once the user clicks the comment menu button in
  *      MemberInformationFragment. Includes a RecyclerView of comments left for the current member.

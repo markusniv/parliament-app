@@ -19,7 +19,7 @@ import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModel
 import com.example.membersofparliamentapp.viewmodel.MemberInformationViewModelFactory
 import com.squareup.picasso.Picasso
 
-/** (c) Markus Nivasalo, 16.9.2021
+/**     (c) Markus Nivasalo, 16.9.2021
  *
  *      The fragment that displays once the user clicks on a mp in MemberListFragment. Shows basic
  *      information of the mp, including name, party, age and constituency. Also allows the user

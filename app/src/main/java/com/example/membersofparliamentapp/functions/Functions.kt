@@ -6,6 +6,11 @@ import android.view.inputmethod.InputMethodManager
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.model.Member
 
+/**     (c) Markus Nivasalo, 16.9.2021
+ *
+ *      Universal functions used in multiple classes.
+ */
+
 // Get a drawable id of a member's party's logo
 fun getPartyColor(memb : Member) : Int {
     return when(memb.party) {
@@ -20,6 +25,8 @@ fun getPartyColor(memb : Member) : Int {
         else -> R.color.vasemmisto
     }
 }
+
+// Get complete name of a member's party
 fun getPartyName(memb : Member) : String {
     return when(memb.party) {
         "kd" -> "Kristillisdemokraatit"
@@ -34,6 +41,12 @@ fun getPartyName(memb : Member) : String {
     }
 }
 
+/*
+  !!NOT MINE!!
+
+  Function used for hiding the keyboard when EditText not active, used in the BaseTextInputEditText-class,
+  source found there.
+ */
 fun View.hideKeyboard() {
     val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(this.windowToken, 0)

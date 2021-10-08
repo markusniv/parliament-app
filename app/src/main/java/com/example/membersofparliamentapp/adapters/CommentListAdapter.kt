@@ -14,6 +14,12 @@ import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.screens.comments.CommentFragment
 import com.example.membersofparliamentapp.viewmodel.CommentViewModel
 
+/**     (c) Markus Nivasalo, 23.9.2021
+ *
+ *      RecyclerView Adapter -class for the CommentFragment, showing the list of all the comments
+ *      made for the currently selected parliament member.
+ */
+
 class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>() {
 
     private var commentList = emptyList<Comment>()

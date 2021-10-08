@@ -8,6 +8,11 @@ import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.model.Score
 import kotlinx.coroutines.flow.Flow
 
+/**     (c) Markus Nivasalo, 16.9.2021
+ *
+ *      Dao-interface containing all the SQL-calls for the RoomDB.
+ */
+
 @Dao
 interface MemberDao {
 

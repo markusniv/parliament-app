@@ -16,6 +16,12 @@ import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.screens.member_list.MemberListFragment
 import com.example.membersofparliamentapp.screens.member_list.MemberListFragmentDirections
 
+/**     (c) Markus Nivasalo, 16.9.2021
+ *
+ *      RecyclerView Adapter -class for the MemberListFragment, showing the list of all the parliament
+ *      members.
+ */
+
 class MemberListAdapter : RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
 
     private var memberList = emptyList<Member>()

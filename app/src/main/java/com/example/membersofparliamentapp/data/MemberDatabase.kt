@@ -8,6 +8,11 @@ import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.model.Score
 
+/**     (c) Markus Nivasalo, 16.9.2021
+ *
+ *      RoomDB class for the database itself.
+ */
+
 @Database(entities = [Member::class, Comment::class, Score::class], version = 1, exportSchema = false)
 abstract class MemberDatabase : RoomDatabase() {
 

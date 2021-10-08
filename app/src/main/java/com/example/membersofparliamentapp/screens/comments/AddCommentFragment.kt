@@ -18,7 +18,7 @@ import com.example.membersofparliamentapp.screens.member_information.MemberInfor
 import com.example.membersofparliamentapp.viewmodel.AddCommentViewModel
 import com.example.membersofparliamentapp.viewmodel.AddCommentViewModelFactory
 
-/** (c) Markus Nivasalo, 16.9.2021
+/**     (c) Markus Nivasalo, 16.9.2021
  *
  *      The fragment that displays once the user clicks on the Add comment -menu button in the
  *      CommentFragment. Allows the user to add a comment which will then be saved to the RoomDB

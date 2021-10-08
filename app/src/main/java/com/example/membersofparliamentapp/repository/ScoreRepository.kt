@@ -6,8 +6,9 @@ import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Score
 import com.example.membersofparliamentapp.network.MemberApi
 
-/** 6.10.2021
+/** (c) Markus Nivasalo, 6.10.2021
  *
+ *      Repository class for the Score-table in the RoomDB
  */
 
 class ScoreRepository(private val memberDao: MemberDao) {

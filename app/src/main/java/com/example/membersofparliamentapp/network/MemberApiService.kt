@@ -7,6 +7,12 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
+/** (c) Markus Nivasalo, 16.9.2021
+ *
+ *      A singleton for handling the Retrofit and Moshi calls for retrieving the parliament members
+ *      from backend. Call is initiated by the DownloadWorker class.
+ */
+
 private const val BASE_URL = "https://users.metropolia.fi/~markuniv/mps/"
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())

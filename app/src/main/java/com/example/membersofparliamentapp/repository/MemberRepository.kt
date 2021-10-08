@@ -1,16 +1,18 @@
 package com.example.membersofparliamentapp.repository
 
-import android.graphics.drawable.Drawable
 import android.util.Log
-import androidx.constraintlayout.helper.widget.Flow
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.example.membersofparliamentapp.data.MemberDao
-import com.example.membersofparliamentapp.model.Comment
-import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.network.MemberApi
 
+/** (c) Markus Nivasalo, 16.9.2021
+ *
+ *      Repository class for the Member-table in the RoomDB
+ */
+
 class MemberRepository(private val memberDao: MemberDao) {
+
+    // Function for adding members into the RoomDB. Initiates the Retrofit-call and if successful,
+    // adds each member in the retrieved json-file into the database.
     suspend fun addMembers() {
         try {
             val memberListResult = MemberApi.retrofitService.getMembers()
@@ -20,11 +22,9 @@ class MemberRepository(private val memberDao: MemberDao) {
                 memberDao.addMember(member)
             }
         } catch (e: Exception) {
-            Log.i("Json call", "Failed misarably.")
+            Log.i("Json call", "Error: ${e}, Failed misarably.")
         }
     }
-
-    // Member functions
 
     fun readAllData() = memberDao.readAllData()
 

@@ -7,6 +7,11 @@ import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.repository.MemberRepository
 
+/** (c) Markus Nivasalo, 1.10.2021
+ *
+ *      Worker class handling the retrieval of the members from the backend.
+ */
+
 class DownloadWorker(appContext: Context, workerParams: WorkerParameters) :
         CoroutineWorker(appContext, workerParams) {
 

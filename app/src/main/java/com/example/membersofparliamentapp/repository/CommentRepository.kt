@@ -4,8 +4,9 @@ import com.example.membersofparliamentapp.data.MemberDao
 import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
 
-/** 6.10.2021
+/** (c) Markus Nivasalo, 6.10.2021
  *
+ *      Repository class for the Comment-table in the RoomDB
  */
 
 class CommentRepository(private val memberDao: MemberDao) {

@@ -14,21 +14,6 @@ class ScoreRepository(private val memberDao: MemberDao) {
 
     suspend fun updateScore(score: Score) = memberDao.updateScore(score)
 
-    suspend fun addScores() {
-        try {
-            val memberListResult = MemberApi.retrofitService.getMembers()
-
-            for (member in memberListResult) {
-                val score = Score(member.personNumber, 0)
-                memberDao.addScore(score)
-            }
-        } catch (e: Exception) {
-            Log.i("Json call", "Failed misarably.")
-        }
-    }
-
-    suspend fun getScoreCount() = memberDao.getScoreCount()
-
     fun getCurrentScore(personNumber: Int) = memberDao.getCurrentScore(personNumber)
 
 }

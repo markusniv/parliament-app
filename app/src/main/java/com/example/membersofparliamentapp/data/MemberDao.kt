@@ -62,4 +62,7 @@ interface MemberDao {
     @Query("SELECT * FROM score_table WHERE personNumber like :personNumber")
     fun getCurrentScore(personNumber: Int): LiveData<Score>
 
+    @Query("SELECT * FROM score_table WHERE personNumber like :personNumber")
+    suspend fun getScoreAsScore(personNumber: Int): Score
+
 }

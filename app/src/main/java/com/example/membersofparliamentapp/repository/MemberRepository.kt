@@ -2,6 +2,7 @@ package com.example.membersofparliamentapp.repository
 
 import android.util.Log
 import com.example.membersofparliamentapp.data.MemberDao
+import com.example.membersofparliamentapp.model.Score
 import com.example.membersofparliamentapp.network.MemberApi
 
 /** (c) Markus Nivasalo, 16.9.2021
@@ -19,6 +20,14 @@ class MemberRepository(private val memberDao: MemberDao) {
             println(memberListResult)
 
             for (member in memberListResult) {
+                /*
+                This score below can be null, regardless of what the IDE says. When updating the list, we'll
+                check if there isn't a score saved for this member and if so, we'll create it. This
+                prevents scores from being wiped away every time the WorkManager downloads an updated
+                member list.
+                 */
+                val score : Score? = memberDao.getScoreAsScore(member.personNumber)
+                if (score == null) memberDao.addScore(Score(member.personNumber, 0))
                 memberDao.addMember(member)
             }
         } catch (e: Exception) {

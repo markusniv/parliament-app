@@ -10,6 +10,14 @@ import androidx.databinding.DataBindingUtil
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentSettingsBinding
+import java.math.BigDecimal
+import java.math.RoundingMode
+
+/**     (c) Markus Nivasalo, 16.9.2021
+ *
+ *      Fragment that contains settings for the application. Currently allows the user to delete
+ *      all the local image cache files for Picasso.
+ */
 
 private lateinit var binding: FragmentSettingsBinding
 
@@ -40,17 +48,19 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
+    // Check the size of the cache folder and return as a Double in kilobytes
     private fun getCacheSize(): Double {
         try {
             val cacheDir = MyApp.appContext.cacheDir
-            return cacheDir.walkTopDown().filter { it.isFile }.map { it.length() }.sum()
-                .toDouble() / 1000
+            return BigDecimal(cacheDir.walkTopDown().filter { it.isFile }.map { it.length() }.sum()
+                .toDouble() / 1024).setScale(2, RoundingMode.HALF_EVEN).toDouble()
         } catch (e: Exception) {
             e.printStackTrace()
         }
         return 0.0
     }
 
+    // Delete the entire cache folder recursively
     private fun deleteCache() {
         try {
             val cacheDir = MyApp.appContext.cacheDir

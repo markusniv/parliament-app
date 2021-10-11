@@ -1,19 +1,15 @@
 package com.example.membersofparliamentapp.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.content.ContextCompat.getColor
-import androidx.core.content.res.ResourcesCompat.getColor
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
-import com.example.membersofparliamentapp.databinding.FragmentMemberListBinding
 import com.example.membersofparliamentapp.databinding.MemberViewBinding
 import com.example.membersofparliamentapp.functions.getPartyColor
 import com.example.membersofparliamentapp.model.Member
-import com.example.membersofparliamentapp.screens.member_list.MemberListFragment
 import com.example.membersofparliamentapp.screens.member_list.MemberListFragmentDirections
 
 /**     (c) Markus Nivasalo, 16.9.2021
@@ -41,9 +37,9 @@ class MemberListAdapter : RecyclerView.Adapter<MemberListAdapter.ViewHolder>() {
         with(holder) {
             with(memberList[position]) {
                 binding.singleListMemberParty.text = this.party
-                binding.singleListMemberParty.setTextColor(holder.itemView.resources.getColor(
-                    getPartyColor(this)))
-                binding.singleListMemberName.text = "${this.first} ${this.last}"
+                binding.singleListMemberParty.setTextColor(
+                    getColor(MyApp.appContext, getPartyColor(this)))
+                binding.singleListMemberName.text = MyApp.appResources.getString(R.string.member_whole_name, this.first, this.last)
                 binding.singleListMember.setOnClickListener {
                     val action = MemberListFragmentDirections.actionMemberListFragmentToMemberInformationFragment(this)
                     holder.itemView.findNavController().navigate(action)

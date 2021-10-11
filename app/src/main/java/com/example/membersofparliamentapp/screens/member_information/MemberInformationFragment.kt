@@ -1,14 +1,17 @@
 package com.example.membersofparliamentapp.screens.member_information
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentMemberInformationBinding
 import com.example.membersofparliamentapp.functions.getPartyColor
@@ -45,6 +48,9 @@ class MemberInformationFragment : Fragment() {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_information, container, false)
 
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            binding.memberImageParty.visibility = View.GONE
+        }
         currentMember = args.member
         mMemberInformationViewModel.getCurrentScore(currentMember.personNumber).observe(viewLifecycleOwner, {
             currentPoints = it.score
@@ -78,29 +84,14 @@ class MemberInformationFragment : Fragment() {
         val memb = currentMember
         binding.txtTitle.text = getMinistry(memb)
         Picasso.get().load("https://avoindata.eduskunta.fi/${memb.picture}").into(binding.imgMember)
-        //binding.imgParty.setImageResource(getLogo(memb))
         binding.partyText.text = getPartyName(memb)
-        binding.partyText.setTextColor(resources.getColor(getPartyColor(memb)))
+        binding.partyText.setTextColor(ContextCompat.getColor(MyApp.appContext, getPartyColor(memb)))
         binding.txtName.text = ("${memb.first} ${memb.last}")
-        binding.txtAge.text = (2021 - memb.bornYear).toString() + " years old"
+        binding.txtAge.text = getString(R.string.years_old, (2021 - memb.bornYear))
         binding.txtConstituency.text = memb.constituency
         binding.pointView.text = currentPoints.toString()
     }
 
-    // Get a drawable id of a member's party's logo
-    private fun getLogo(member : Member) : Int {
-        return when(member.party) {
-            "kd" -> R.drawable.ic_kd
-            "kesk" -> R.drawable.ic_kesk
-            "kok" -> R.drawable.ic_kok
-            "liik" -> R.drawable.ic_liik
-            "ps" -> R.drawable.ic_ps
-            "r" -> R.drawable.ic_rkp
-            "sd" -> R.drawable.ic_sdp
-            "vihr" -> R.drawable.ic_vihr
-            else -> R.drawable.ic_vas
-        }
-    }
     // Check if the member is a minister and return a string accordingly
     private fun getMinistry(memb : Member) : String = if (memb.minister) "Minister" else "Member of parliament"
 

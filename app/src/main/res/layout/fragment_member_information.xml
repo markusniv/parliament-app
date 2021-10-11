@@ -6,22 +6,59 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        >
 
-        <ImageView
-            android:id="@+id/img_member"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/member_image_party"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="50dp"
-            app:layout_constraintBottom_toTopOf="@+id/partyText"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginRight="50dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardElevation="@dimen/cardview_compat_inset_shadow"
+            app:layout_constraintBottom_toTopOf="@id/member_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+            app:strokeColor="@color/suomi_blue"
+            app:strokeWidth="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_member"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="40dp"
+                    android:contentDescription="@string/member_image_content_desc"
+                    tools:src="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/partyText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginBottom="10dp"
+                    android:shadowColor="#000000"
+                    android:shadowDx="2.0"
+                    android:shadowDy="2.0"
+                    android:shadowRadius="1.6"
+                    android:text="@string/list_member_party"
+                    android:textAlignment="center"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
 
         <RelativeLayout
             android:id="@+id/member_content"
@@ -37,7 +74,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="50dp"
                 android:hint="@string/member_title"
                 android:text=""
                 android:textAlignment="center"
@@ -93,8 +129,8 @@
                 android:id="@+id/deductPoints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="30dp"
                 android:text="@string/deductPoint" />
 
             <TextView
@@ -103,7 +139,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:text="0"
+                android:text=""
                 android:textAlignment="center"
                 android:textSize="40sp"
                 android:textStyle="bold" />
@@ -112,27 +148,11 @@
                 android:id="@+id/addPoints"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="30dp"
                 android:text="@string/addPoint" />
 
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/partyText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/list_member_party"
-            app:layout_constraintBottom_toTopOf="@+id/member_content"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textAlignment="center"
-            android:shadowColor="#000000"
-            android:shadowDx="2.0"
-            android:shadowDy="2.0"
-            android:shadowRadius="1.6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

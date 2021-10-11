@@ -17,6 +17,12 @@ import com.example.membersofparliamentapp.repository.ScoreRepository
 import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragment
 import java.util.concurrent.TimeUnit
 
+/**     (c) Markus Nivasalo, 16.9.2021
+ *
+ *      MainActivity-class for the app, has the PeriodicWorkRequest for updating the member database,
+ *      and also overrides the back arrow function for coherent moving across fragments.
+ */
+
 class MainActivity : AppCompatActivity() {
 
     private val periodicWorkRequest = PeriodicWorkRequestBuilder<DownloadWorker>(24, TimeUnit.HOURS).build()
@@ -31,12 +37,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        val view = findViewById<View>(R.id.fragmentContainerView)
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentContainerView)
-        if  (navHostFragment != null) {
-            val currentFragment = navHostFragment.childFragmentManager.fragments[0]
-        }
         val navController = findNavController(R.id.fragmentContainerView)
 
         return navController.navigateUp() || super.onSupportNavigateUp()

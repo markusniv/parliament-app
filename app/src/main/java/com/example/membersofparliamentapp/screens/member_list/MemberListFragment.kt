@@ -36,7 +36,7 @@ class MemberListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mMemberListViewModel.addScores()
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_member_list, container, false)
@@ -76,13 +76,14 @@ class MemberListFragment : Fragment() {
         })
     }
 
+    // Handles creating the various popup menus and setting filters accordingly.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId)  {
             R.id.menuDropdown-> {
                 PopupMenu(
                     MyApp.appContext,
                     binding.anchorMenu,
-                    Gravity.RIGHT
+                    Gravity.END
                 ).apply {
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
@@ -90,7 +91,7 @@ class MemberListFragment : Fragment() {
                                 PopupMenu(
                                     MyApp.appContext,
                                     binding.anchorMenu,
-                                    Gravity.RIGHT
+                                    Gravity.END
                                 ).apply {
                                     setOnMenuItemClickListener { item ->
                                         when (item.itemId) {
@@ -98,7 +99,7 @@ class MemberListFragment : Fragment() {
                                                 PopupMenu(
                                                     MyApp.appContext,
                                                     binding.anchorMenu,
-                                                    Gravity.RIGHT
+                                                    Gravity.END
                                                 ).apply {
                                                     setOnMenuItemClickListener { party ->
                                                         mMemberListViewModel.currentFilter.currentStatus = Status.PARTY
@@ -147,8 +148,73 @@ class MemberListFragment : Fragment() {
                                                 }
                                                 true
                                             }
-                                            R.id.selectPerson -> {
-                                                getList()
+                                            R.id.selectConstituency -> {
+                                                PopupMenu(
+                                                    MyApp.appContext,
+                                                    binding.anchorMenu,
+                                                    Gravity.END
+                                                ).apply {
+                                                    setOnMenuItemClickListener { constituency ->
+                                                        mMemberListViewModel.currentFilter.currentStatus = Status.CONSTITUENCY
+                                                        when (constituency.itemId) {
+                                                            R.id.filterHelsinki -> {
+                                                                setConstituencyGetList("Helsinki")
+                                                                true
+                                                            }
+                                                            R.id.filterUusi -> {
+                                                                setConstituencyGetList("Uusimaa")
+                                                                true
+                                                            }
+                                                            R.id.filterVars -> {
+                                                                setConstituencyGetList("Varsinais-Suomi")
+                                                                true
+                                                            }
+                                                            R.id.filterSata -> {
+                                                                setConstituencyGetList("Satakunta")
+                                                                true
+                                                            }
+                                                            R.id.filterAhv -> {
+                                                                setConstituencyGetList("Ahvenanmaa")
+                                                                true
+                                                            }
+                                                            R.id.filterHame -> {
+                                                                setConstituencyGetList("Häme")
+                                                                true
+                                                            }
+                                                            R.id.filterPirk -> {
+                                                                setConstituencyGetList("Pirkanmaa")
+                                                                true
+                                                            }
+                                                            R.id.filterKaak -> {
+                                                                setConstituencyGetList("Kaakkois-Suomi")
+                                                                true
+                                                            }
+                                                            R.id.filterSavo -> {
+                                                                setConstituencyGetList("Savo-Karjala")
+                                                                true
+                                                            }
+                                                            R.id.filterVaasa -> {
+                                                                setConstituencyGetList("Vaasa")
+                                                                true
+                                                            }
+                                                            R.id.filterKeski -> {
+                                                                setConstituencyGetList("Keski-Suomi")
+                                                                true
+                                                            }
+                                                            R.id.filterOulu -> {
+                                                                setConstituencyGetList("Oulu")
+                                                                true
+                                                            }
+                                                            R.id.filterLappi -> {
+                                                                setConstituencyGetList("Lappi")
+                                                                true
+                                                            }
+                                                            else -> false
+                                                        }
+                                                    }
+                                                    inflate(R.menu.dropdown_constituency)
+                                                    show()
+                                                }
                                                 true
                                             }
                                             else -> false
@@ -180,6 +246,7 @@ class MemberListFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    // Sets the RecyclerView's member list according to the current filters.
     private fun getList() {
         val filter = mMemberListViewModel.currentFilter
 
@@ -198,6 +265,13 @@ class MemberListFragment : Fragment() {
                     })
                 }
             }
+            Status.CONSTITUENCY -> {
+                filter.currentConstituency?.let {
+                    mMemberListViewModel.filterByConstituency(it).observe(viewLifecycleOwner, { member ->
+                        adapter.setData(member)
+                    })
+                }
+            }
             Status.NONE -> {
                 mMemberListViewModel.readAllData().observe(viewLifecycleOwner, { member ->
                     adapter.setData(member)
@@ -208,6 +282,10 @@ class MemberListFragment : Fragment() {
 
     private fun setPartyGetList(party : String) {
         mMemberListViewModel.currentFilter.currentParty = party
+        getList()
+    }
+    private fun setConstituencyGetList(constituency : String) {
+        mMemberListViewModel.currentFilter.currentConstituency = constituency
         getList()
     }
     private fun setSearchGetList(search : String) {
@@ -222,6 +300,7 @@ class MemberListFragment : Fragment() {
         mMemberListViewModel.currentFilter.currentStatus = Status.NONE
         mMemberListViewModel.currentFilter.currentParty = null
         mMemberListViewModel.currentFilter.currentSearch = null
+        mMemberListViewModel.currentFilter.currentConstituency = null
         getList()
     }
 

@@ -11,9 +11,10 @@ class Filter {
     var currentStatus: Status = Status.NONE
     var currentParty: String? = null
     var currentSearch: String? = null
+    var currentConstituency: String? = null
 
 }
 
 enum class Status {
-    NONE, PARTY, SEARCH
+    NONE, PARTY, SEARCH, CONSTITUENCY
 }

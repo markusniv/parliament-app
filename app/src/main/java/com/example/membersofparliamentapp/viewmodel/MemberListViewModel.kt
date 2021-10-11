@@ -42,14 +42,14 @@ class MemberListViewModel : ViewModel() {
 
     fun readAllData() = memberRepository.readAllData()
 
-    fun readAllDataByParty() = memberRepository.readAllDataByParty()
-
     fun filterByParty(party: String) = memberRepository.filterByParty(party)
 
     fun filterByName(search: String) = memberRepository.filterByName(search)
+
+    fun filterByConstituency(constituency: String) = memberRepository.filterByConstituency(constituency)
 }
 
-class MemberListViewModelFactory() : ViewModelProvider.Factory {
+class MemberListViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MemberListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

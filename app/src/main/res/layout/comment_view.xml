@@ -4,7 +4,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:id="@+id/singleListComment">
+        android:id="@+id/singleListComment"
+        android:background="@color/white">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -17,6 +18,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:text="@string/empty_note"
+                android:textColor="@color/suomi_blue"
                 android:layout_centerInParent="true"
                 android:textSize="16sp"/>
 

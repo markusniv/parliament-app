@@ -6,24 +6,15 @@ import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.adapters.CommentListAdapter
-import com.example.membersofparliamentapp.adapters.MemberListAdapter
-import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.databinding.FragmentCommentBinding
-import com.example.membersofparliamentapp.model.Comment
-import com.example.membersofparliamentapp.repository.MemberRepository
-import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentArgs
-import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentDirections
 import com.example.membersofparliamentapp.viewmodel.CommentViewModel
 import com.example.membersofparliamentapp.viewmodel.CommentViewModelFactory
 
@@ -48,7 +39,7 @@ class CommentFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_comment, container, false)
 

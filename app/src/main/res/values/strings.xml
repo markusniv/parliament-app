@@ -31,8 +31,22 @@
     <string name="empty_note">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
     <string name="comment">Comment</string>
     <string name="delete_image_cache">Delete cache</string>
-    <string name="cache_size_placeholder">cache size: 0kb</string>
+    <string name="cache_size_placeholder">cache size: %1$skb</string>
     <string name="delete_image">Delete image(s)</string>
     <string name="member_whole_name">%1$s %2$s</string>
     <string name="member_image_content_desc">Image of this member</string>
+    <string name="hel">Helsinki</string>
+    <string name="uusi">Uusimaa</string>
+    <string name="vars">Varsinais-Suomi</string>
+    <string name="sata">Satakunta</string>
+    <string name="ahv">Ahvenanmaa</string>
+    <string name="hame">Häme</string>
+    <string name="pirk">Pirkanmaa</string>
+    <string name="kaak">Kaakkois-Suomi</string>
+    <string name="savo">Savo-Karjala</string>
+    <string name="vaasa">Vaasa</string>
+    <string name="keski">Keski-Suomi</string>
+    <string name="oulu">Oulu</string>
+    <string name="lappi">Lappi</string>
+    <string name="constituency">Constituency</string>
 </resources>

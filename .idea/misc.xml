@@ -6,6 +6,7 @@
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/drawable/ic_kd.xml" value="0.5703125" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/drawable/ic_kesk.xml" value="0.3828125" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/drawable/ic_vihr.xml" value="0.22239583333333332" />
+        <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/drawable/rectangle.xml" value="0.362962962962963" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/layout/comment_view.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/layout/fragment_add_comment.xml" value="0.36666666666666664" />
@@ -15,6 +16,7 @@
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/layout/fragment_settings.xml" value="0.1" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/layout/member_view.xml" value="0.5541666666666667" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/menu/delete_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/menu/dropdown_constituency.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/menu/dropdown_filters.xml" value="0.1484375" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/menu/dropdown_menu.xml" value="0.37864583333333335" />
         <entry key="..\:/Users/marku/AndroidStudioProjects/MembersOfParliamentApp/app/src/main/res/menu/dropdown_parties.xml" value="0.36666666666666664" />

@@ -1,12 +1,10 @@
 package com.example.membersofparliamentapp.data
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.model.Score
-import kotlinx.coroutines.flow.Flow
 
 /**     (c) Markus Nivasalo, 16.9.2021
  *
@@ -27,14 +25,14 @@ interface MemberDao {
     @Query("SELECT COUNT(*) from member_table")
     suspend fun getMemberCount() : Int
 
-    @Query("SELECT * FROM member_table ORDER BY party")
-    fun readAllDataByParty(): LiveData<List<Member>>
-
     @Query("SELECT * FROM member_table WHERE party like :party")
     fun filterByParty(party : String) : LiveData<List<Member>>
 
     @Query("SELECT * FROM member_table WHERE first like :search OR last LIKE :search")
     fun filterByName(search : String) : LiveData<List<Member>>
+
+    @Query("SELECT * FROM member_table WHERE constituency like :constituency")
+    fun filterByConstituency(constituency : String) : LiveData<List<Member>>
 
     // Comment SQL queries
 

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/filterHelsinki"
+        android:title="@string/hel"
+        />
+    <item android:id="@+id/filterUusi"
+        android:title="@string/uusi"
+        />
+    <item android:id="@+id/filterVars"
+        android:title="@string/vars"
+        />
+    <item android:id="@+id/filterSata"
+        android:title="@string/sata"
+        />
+    <item android:id="@+id/filterAhv"
+        android:title="@string/ahv"
+        />
+    <item android:id="@+id/filterHame"
+        android:title="@string/hame"
+        />
+    <item android:id="@+id/filterPirk"
+        android:title="@string/pirk"
+        />
+    <item android:id="@+id/filterKaak"
+        android:title="@string/kaak"
+        />
+    <item android:id="@+id/filterSavo"
+        android:title="@string/savo"
+        />
+    <item android:id="@+id/filterVaasa"
+        android:title="@string/vaasa"
+        />
+    <item android:id="@+id/filterKeski"
+        android:title="@string/keski"
+        />
+    <item android:id="@+id/filterOulu"
+        android:title="@string/oulu"
+        />
+    <item android:id="@+id/filterLappi"
+        android:title="@string/lappi"
+        />
+</menu>

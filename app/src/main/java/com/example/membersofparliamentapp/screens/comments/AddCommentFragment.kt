@@ -14,7 +14,6 @@ import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.FragmentAddCommentBinding
 import com.example.membersofparliamentapp.model.Comment
-import com.example.membersofparliamentapp.screens.member_information.MemberInformationFragmentArgs
 import com.example.membersofparliamentapp.viewmodel.AddCommentViewModel
 import com.example.membersofparliamentapp.viewmodel.AddCommentViewModelFactory
 
@@ -37,7 +36,7 @@ class AddCommentFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_comment, container, false)
 
         binding.addCommentButton.setOnClickListener {

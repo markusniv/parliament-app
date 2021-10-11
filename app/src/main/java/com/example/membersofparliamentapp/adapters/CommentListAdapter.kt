@@ -1,18 +1,15 @@
 package com.example.membersofparliamentapp.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LiveData
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.R
 import com.example.membersofparliamentapp.databinding.CommentViewBinding
 import com.example.membersofparliamentapp.model.Comment
-import com.example.membersofparliamentapp.screens.comments.CommentFragment
-import com.example.membersofparliamentapp.viewmodel.CommentViewModel
 
 /**     (c) Markus Nivasalo, 23.9.2021
  *
@@ -20,7 +17,7 @@ import com.example.membersofparliamentapp.viewmodel.CommentViewModel
  *      made for the currently selected parliament member.
  */
 
-class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>() {
+class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.ViewHolder>() {
 
     private var commentList = emptyList<Comment>()
     val selectedCommentsLiveData = MutableLiveData<MutableList<Comment>>()
@@ -86,13 +83,13 @@ class CommentListAdapter() : RecyclerView.Adapter<CommentListAdapter.ViewHolder>
     }
 
     private fun setSelectedView(view : View, comment: Comment) {
-        view.setBackgroundColor(MyApp.appResources.getColor(R.color.design_default_color_primary))
+        view.setBackgroundColor(ContextCompat.getColor(MyApp.appContext, R.color.lighter_blue))
         view.background.alpha = 20
         addSelectedComment(comment)
     }
 
     private fun setUnselectedView(view : View, comment: Comment) {
-        view.setBackgroundColor(MyApp.appResources.getColor(R.color.cardview_light_background))
+        view.setBackgroundColor(ContextCompat.getColor(MyApp.appContext, R.color.white))
         removeSelectedComment(comment)
     }
 

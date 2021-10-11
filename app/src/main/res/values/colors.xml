@@ -17,4 +17,6 @@
     <color name="vasemmisto">#F00A64</color>
     <color name="vihreat">#61BF1A</color>
     <color name="suomi_blue">#002EA2</color>
+    <color name="darker_blue">#021F68</color>
+    <color name="lighter_blue">#4479FF</color>
 </resources>

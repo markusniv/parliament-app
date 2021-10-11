@@ -36,7 +36,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerInParent="true"
                     android:layout_marginTop="20dp"
-                    android:layout_marginBottom="40dp"
+                    android:layout_marginBottom="60dp"
                     android:contentDescription="@string/member_image_content_desc"
                     tools:src="@tools:sample/avatars" />
 

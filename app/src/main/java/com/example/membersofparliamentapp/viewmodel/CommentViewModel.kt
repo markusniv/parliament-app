@@ -1,17 +1,13 @@
 package com.example.membersofparliamentapp.viewmodel
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.adapters.CommentListAdapter
-import com.example.membersofparliamentapp.data.Filter
 import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.model.Comment
-import com.example.membersofparliamentapp.model.Member
 import com.example.membersofparliamentapp.repository.CommentRepository
-import com.example.membersofparliamentapp.repository.MemberRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -46,7 +42,7 @@ class CommentViewModel : ViewModel() {
     fun emptySelectedCommentsList() = adapter.emptySelectedCommentsList()
 }
 
-class CommentViewModelFactory() : ViewModelProvider.Factory {
+class CommentViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(CommentViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

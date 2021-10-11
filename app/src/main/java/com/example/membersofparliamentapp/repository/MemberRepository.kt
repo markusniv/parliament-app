@@ -22,17 +22,17 @@ class MemberRepository(private val memberDao: MemberDao) {
                 memberDao.addMember(member)
             }
         } catch (e: Exception) {
-            Log.i("Json call", "Error: ${e}, Failed misarably.")
+            Log.i("Json call", "Error: ${e}, Failed miserably.")
         }
     }
 
     fun readAllData() = memberDao.readAllData()
 
-    fun readAllDataByParty() = memberDao.readAllDataByParty()
-
     fun filterByParty(party: String) = memberDao.filterByParty(party)
 
     fun filterByName(search: String) = memberDao.filterByName(search)
+
+    fun filterByConstituency(constituency: String) = memberDao.filterByConstituency(constituency)
 
 
 }

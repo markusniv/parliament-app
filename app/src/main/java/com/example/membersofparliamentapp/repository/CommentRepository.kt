@@ -2,7 +2,6 @@ package com.example.membersofparliamentapp.repository
 
 import com.example.membersofparliamentapp.data.MemberDao
 import com.example.membersofparliamentapp.model.Comment
-import com.example.membersofparliamentapp.model.Member
 
 /** (c) Markus Nivasalo, 6.10.2021
  *

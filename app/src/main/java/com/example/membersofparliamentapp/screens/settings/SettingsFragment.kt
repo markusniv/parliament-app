@@ -18,7 +18,7 @@ class SettingsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_settings, container, false)
 
         binding.settingsDeleteCache.setOnClickListener {
@@ -63,7 +63,7 @@ class SettingsFragment : Fragment() {
 
     private fun updateUi() {
         val cacheSizeText = binding.settingsCacheSizeText
-        cacheSizeText.text = "cache size: ${getCacheSize()}kb"
+        cacheSizeText.text = getString(R.string.cache_size_placeholder, getCacheSize().toString())
     }
 
 }

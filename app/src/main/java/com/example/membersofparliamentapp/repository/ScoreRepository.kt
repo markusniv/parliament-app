@@ -2,7 +2,6 @@ package com.example.membersofparliamentapp.repository
 
 import android.util.Log
 import com.example.membersofparliamentapp.data.MemberDao
-import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.model.Score
 import com.example.membersofparliamentapp.network.MemberApi
 

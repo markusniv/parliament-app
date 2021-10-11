@@ -7,7 +7,6 @@ import com.example.membersofparliamentapp.MyApp
 import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.model.Comment
 import com.example.membersofparliamentapp.repository.CommentRepository
-import com.example.membersofparliamentapp.repository.MemberRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -32,7 +31,7 @@ class AddCommentViewModel : ViewModel() {
 
 }
 
-class AddCommentViewModelFactory() : ViewModelProvider.Factory {
+class AddCommentViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AddCommentViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

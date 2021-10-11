@@ -37,7 +37,7 @@ class MemberInformationViewModel : ViewModel() {
 
 }
 
-class MemberInformationViewModelFactory() : ViewModelProvider.Factory {
+class MemberInformationViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(MemberInformationViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

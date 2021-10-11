@@ -139,4 +139,9 @@ class MemberInformationFragment : Fragment() {
         binding.pointView.text = currentPoints.toString()
     }
 
+    override fun onPause() {
+        updateDatabase(Score(currentMember.personNumber, currentPoints))
+        super.onPause()
+    }
+
 }

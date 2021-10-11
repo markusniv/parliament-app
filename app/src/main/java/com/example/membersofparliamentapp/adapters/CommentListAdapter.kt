@@ -60,6 +60,11 @@ class CommentListAdapter : RecyclerView.Adapter<CommentListAdapter.ViewHolder>()
         notifyDataSetChanged()
     }
 
+    /*
+        The functions below deal with selecting and unselecting comments in the Comment-fragment,
+        so that the fragment knows whether or not we are in the comment deleting mode
+    */
+
     private fun <T> MutableLiveData<T>.notifyObserver() {
         this.value = this.value
     }

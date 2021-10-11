@@ -7,8 +7,9 @@ import com.example.membersofparliamentapp.data.MemberDatabase
 import com.example.membersofparliamentapp.repository.CommentRepository
 import com.example.membersofparliamentapp.repository.ScoreRepository
 
-/**
- * The Application class for the app, giving access to the application context everywhere.
+/**     (c) Markus Nivasalo, 16.9.2021
+ *
+ *      The Application class for the app, giving access to the application context everywhere.
  */
 
 class MyApp : Application() {

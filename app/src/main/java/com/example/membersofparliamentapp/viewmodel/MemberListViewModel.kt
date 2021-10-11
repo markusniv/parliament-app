@@ -30,16 +30,6 @@ class MemberListViewModel : ViewModel() {
 
     }
 
-    fun addScores() {
-        viewModelScope.launch(Dispatchers.IO) {
-            val scoreAmount = scoreRepository.getScoreCount()
-            if (scoreAmount == 0) {
-                scoreRepository.addScores()
-            }
-        }
-    }
-
-
     fun readAllData() = memberRepository.readAllData()
 
     fun filterByParty(party: String) = memberRepository.filterByParty(party)

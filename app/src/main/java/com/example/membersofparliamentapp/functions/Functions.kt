@@ -42,10 +42,10 @@ fun getPartyName(memb : Member) : String {
 }
 
 /*
-  !!NOT MINE!!
+    !!NOT MINE!!
 
-  Function used for hiding the keyboard when EditText not active, used in the BaseTextInputEditText-class,
-  source found there.
+    Function used for hiding the keyboard when EditText not active, used in the BaseTextInputEditText-class,
+    source found there.
  */
 fun View.hideKeyboard() {
     val inputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
